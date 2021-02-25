@@ -1,0 +1,153 @@
+.card__header h1 > :last-child {
+  margin: 0 0 0 auto;
+}
+
+.profile,
+.skills,
+.services,
+.projects,
+.experience,
+.blog {
+  width: 60%;
+}
+
+.profile__info {
+  align-self: flex-end;
+}
+
+.profile__position,
+.profile__name {
+  font-weight: 600;
+  text-shadow: 2px 3px var(--shadow2);
+  text-align: right;
+}
+
+.profile__position {
+  gap: 10px;
+  font-size: 2.6vw;
+  display: flex;
+  align-items: center;
+}
+
+.profile__name {
+  color: var(--accent3);
+  font-size: 2vw;
+  transition: all 0.3 ease-in-out;
+}
+
+.skills {
+  background-image: linear-gradient(
+    to right,
+    var(--highlight),
+    var(--highlight2)
+  );
+}
+
+.skills:hover {
+  filter: brightness(1.05);
+}
+
+.skills * {
+  color: var(--shadow);
+}
+
+.skills__list {
+  font-weight: 700;
+  font-size: 2vw;
+  width: 100%;
+  column-gap: 7%;
+  row-gap: 3%;
+  display: grid;
+  grid-template: repeat(4, 1fr) / repeat(4, 1fr);
+  justify-items: center;
+  align-items: end;
+}
+
+.skills__item {
+  padding: 5% 15%;
+  transition: all 0.3s ease-in-out;
+}
+
+.skills__item:hover {
+  transform: scale(1.15);
+  background-color: var(--base2);
+  box-shadow: 0.5px 7px 3px -3px var(--shadow3);
+}
+
+.skills__item:hover .skills__link {
+  color: var(--highlight);
+}
+
+.skills__link {
+  font-size: 12px;
+  display: flex;
+  gap: 7px;
+  flex-direction: column;
+  text-align: center;
+}
+
+.services {
+  gap: 3%;
+  background-image: linear-gradient(to right, var(--accent4), var(--accent5));
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.services * {
+  color: var(--highlight4);
+}
+
+.services__list {
+  font-size: 1.8vw;
+  width: 100%;
+  row-gap: 3%;
+  display: grid;
+  grid-template: repeat(4, 1fr) / 1fr;
+}
+
+.services__item {
+  border-radius: 20px;
+  column-gap: 5%;
+  padding: 3%;
+  border: 1px solid transparent;
+  display: flex;
+  align-items: center;
+  transition: all 0.2s ease-in-out;
+}
+
+.services__item:hover {
+  transform: scale(1.03);
+  background-color: var(--base5);
+  border-color: var(--highlight);
+}
+
+.services__item:active {
+  transform: scale(1);
+}
+
+.projects {
+  background-image: linear-gradient(to right, var(--base4), var(--base5));
+}
+
+.experience {
+  background-image: linear-gradient(to right, var(--accent), var(--accent2));
+}
+
+.experience__header {
+  filter: brightness(2);
+  color: var(--accent5);
+}
+
+.blog {
+  background-image: linear-gradient(to right, var(--shadow3), var(--shadow4));
+}
+
+.blog__header {
+  filter: brightness(2.5);
+  color: var(--shadow3);
+}
+
+.games {
+  min-height: 50vh;
+  background-image: linear-gradient(to right, var(--shadow), var(--shadow5));
+}

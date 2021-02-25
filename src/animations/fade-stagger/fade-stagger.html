@@ -1,0 +1,10 @@
+<transition-group
+  name="staggered-list"
+  :tag="listContainerTag"
+  :mode="animationMode"
+  @before-enter="beforeEnter"
+  @enter="enter"
+  @leave="leave"
+>
+  <slot></slot>
+</transition-group>

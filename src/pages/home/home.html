@@ -1,0 +1,203 @@
+<div class="page">
+  <Card class="profile">
+    <template #body>
+      <div class="profile__image">
+        <Vsvg
+          name="userStar"
+          width="80"
+          height="80"
+          stroke-color="#3d6bc2"
+        ></Vsvg>
+      </div>
+      <div class="profile__info">
+        <h1 class="profile__position">
+          <Vsvg name="pc" width="30" height="30" stroke-color="#bbca61"></Vsvg>
+          {{ position }}
+        </h1>
+        <h1 class="profile__name">{{ name }}</h1>
+      </div>
+    </template>
+  </Card>
+
+  <Card class="skills" @mouseenter="showAllSkills">
+    <template #header>
+      <h1 class="skills__header">
+        <Vsvg name="stars" width="44" height="42" stroke-color="#000000"></Vsvg>
+        {{ skillsTitle }}
+        <Vsvg
+          :hidden="skillsList.length"
+          name="caretDown"
+          width="30"
+          height="30"
+        ></Vsvg>
+      </h1>
+    </template>
+    <template #body>
+      <FadeStagger
+        delay-interval="40"
+        list-container-tag="div"
+        class="skills__list"
+      >
+        <template v-if="skillsList.length">
+          <div
+            v-for="(skill, index) in skillsList"
+            :key="skill.name"
+            :data-index="index"
+            class="skills__item"
+          >
+            <a :href="skill.link" target="_blank" class="skills__link">
+              <img :src="skill.img" alt="" />
+              {{ skill.name }}
+            </a>
+          </div>
+        </template>
+      </FadeStagger>
+    </template>
+  </Card>
+
+  <Card class="services" @mouseenter="showAllServices" ref="servicesCard">
+    <template #header>
+      <h1 class="services__header">
+        <Vsvg
+          name="heartShake"
+          width="40"
+          height="40"
+          stroke-color="#c9dfe0"
+        ></Vsvg>
+        {{ servicesTitle }}
+        <Vsvg
+          :hidden="servicesList.length"
+          name="caretDown"
+          width="30"
+          height="30"
+          stroke-color="#c9dfe0"
+        ></Vsvg>
+      </h1>
+    </template>
+    <template #body>
+      <FadeStagger
+        delay-interval="300"
+        list-container-tag="div"
+        class="services__list"
+      >
+        <template v-if="servicesList.length">
+          <div
+            v-for="(service, index) in servicesList"
+            :key="service.name"
+            :data-index="index"
+            @mouseenter="changeServicesBackground(service.img)"
+            @mouseleave="changeServicesBackground()"
+            class="services__item"
+          >
+            <Vsvg
+              :name="service.logo"
+              width="40"
+              height="30"
+              stroke-color="#c9dfe0"
+            ></Vsvg>
+            {{ service.name }}
+          </div>
+        </template>
+      </FadeStagger>
+    </template>
+  </Card>
+
+  <Card class="projects" @mouseenter="showFeaturedProjectsList">
+    <template #header>
+      <h1 class="projects__header">
+        <Vsvg
+          name="circlesSquare"
+          width="40"
+          height="40"
+          stroke-color="#bbca61"
+        ></Vsvg>
+        {{ projectsTitle }}
+        <Vsvg
+          :hidden="featuredProjectsList.length"
+          name="caretDown"
+          width="30"
+          height="30"
+          stroke-color="#bbca61"
+        ></Vsvg>
+      </h1>
+    </template>
+    <template #body>
+      <FadeStagger
+        delay-interval="300"
+        list-container-tag="div"
+        class="projects__list"
+      >
+        <template v-if="featuredProjectsList.length">
+          <div
+            v-for="(project, index) in featuredProjectsList"
+            :key="project.name"
+            :data-index="index"
+            class="projects__item"
+          >
+            <Vsvg
+              :name="project.logo"
+              width="40"
+              height="40"
+              stroke-color="#bbca61"
+            ></Vsvg>
+            {{ project.name }}
+          </div>
+        </template>
+      </FadeStagger>
+    </template>
+  </Card>
+
+  <Card class="experience">
+    <template #header>
+      <h1 class="experience__header">
+        <Vsvg
+          name="userFolder"
+          width="40"
+          height="40"
+          stroke-color="#86451a"
+        ></Vsvg>
+        {{ experienceTitle }}
+        <Vsvg
+          :hidden="experienceList.length"
+          name="caretDown"
+          width="30"
+          height="30"
+          stroke-color="#86451a"
+        ></Vsvg>
+      </h1>
+    </template>
+    <template #body>
+      <div class="projects__list">
+        <div class="projects__item"></div>
+      </div>
+    </template>
+  </Card>
+  <Card class="blog">
+    <template #header>
+      <h1 class="blog__header">
+        <Vsvg
+          name="news"
+          width="40"
+          height="40"
+          stroke-color="rgba(77, 79, 85, 0.7)"
+        ></Vsvg>
+        {{ blogTitle }}
+        <Vsvg
+          :hidden="experienceList.length"
+          name="caretDown"
+          width="30"
+          height="30"
+          stroke-color="rgba(77, 79, 85, 0.7)"
+        ></Vsvg>
+      </h1>
+    </template>
+    <template #body>
+      <div class="projects__list">
+        <div class="projects__item"></div>
+      </div>
+    </template>
+  </Card>
+  <Banner class="games">
+    <template #body> </template>
+  </Banner>
+</div>

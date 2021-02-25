@@ -1,0 +1,21 @@
+:root {
+  --base: #222133;
+  --base2: rgba(35, 50, 92, 0.3);
+  --base3: rgba(88, 105, 146, 0.3);
+  --base4: rgba(108, 38, 129, 0.3);
+  --base5: rgba(64, 18, 82, 0.5);
+  --accent: #486d4c;
+  --accent2: rgba(30, 124, 39, 0.9);
+  --accent3: #3d6bc2;
+  --accent4: #a87c39;
+  --accent5: #86451a;
+  --highlight: #bbca61;
+  --highlight2: #888b43;
+  --highlight3: #91d5da;
+  --highlight4: #c9dfe0;
+  --shadow: #161617;
+  --shadow2: rgba(9, 18, 49, 0.7);
+  --shadow3: rgba(77, 79, 85, 0.7);
+  --shadow4: rgba(50, 53, 59, 0.7);
+  --shadow5: #080808;
+}
