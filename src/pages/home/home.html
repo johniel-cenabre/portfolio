@@ -4,14 +4,19 @@
       <div class="profile__image">
         <Vsvg
           name="userStar"
-          width="80"
-          height="80"
+          width="5rem"
+          height="5rem"
           stroke-color="#3d6bc2"
         ></Vsvg>
       </div>
       <div class="profile__info">
         <h1 class="profile__position">
-          <Vsvg name="pc" width="30" height="30" stroke-color="#bbca61"></Vsvg>
+          <Vsvg
+            name="pc"
+            width="1.3rem"
+            height="1.3rem"
+            stroke-color="#bbca61"
+          ></Vsvg>
           {{ position }}
         </h1>
         <h1 class="profile__name">{{ name }}</h1>
@@ -22,13 +27,18 @@
   <Card class="skills" @mouseenter="showAllSkills">
     <template #header>
       <h1 class="skills__header">
-        <Vsvg name="stars" width="44" height="42" stroke-color="#000000"></Vsvg>
+        <Vsvg
+          name="stars"
+          width="1.7rem"
+          height="1.7rem"
+          stroke-color="#000000"
+        ></Vsvg>
         {{ skillsTitle }}
         <Vsvg
           :hidden="skillsList.length"
           name="caretDown"
-          width="30"
-          height="30"
+          width="1.7rem"
+          height="1.7rem"
         ></Vsvg>
       </h1>
     </template>
@@ -45,7 +55,7 @@
             :data-index="index"
             class="skills__item"
           >
-            <a :href="skill.link" target="_blank" class="skills__link">
+            <a :href="skill.link" target="_" class="skills__link">
               <img :src="skill.img" alt="" />
               {{ skill.name }}
             </a>
@@ -60,16 +70,16 @@
       <h1 class="services__header">
         <Vsvg
           name="heartShake"
-          width="40"
-          height="40"
+          width="1.7rem"
+          height="1.7rem"
           stroke-color="#c9dfe0"
         ></Vsvg>
         {{ servicesTitle }}
         <Vsvg
           :hidden="servicesList.length"
           name="caretDown"
-          width="30"
-          height="30"
+          width="1.7rem"
+          height="1.7rem"
           stroke-color="#c9dfe0"
         ></Vsvg>
       </h1>
@@ -91,8 +101,8 @@
           >
             <Vsvg
               :name="service.logo"
-              width="40"
-              height="30"
+              width="1.7rem"
+              height="1.7rem"
               stroke-color="#c9dfe0"
             ></Vsvg>
             {{ service.name }}
@@ -107,43 +117,82 @@
       <h1 class="projects__header">
         <Vsvg
           name="circlesSquare"
-          width="40"
-          height="40"
+          width="1.7rem"
+          height="1.7rem"
           stroke-color="#bbca61"
         ></Vsvg>
         {{ projectsTitle }}
         <Vsvg
           :hidden="featuredProjectsList.length"
           name="caretDown"
-          width="30"
-          height="30"
+          width="1.7rem"
+          height="1.7rem"
           stroke-color="#bbca61"
         ></Vsvg>
       </h1>
     </template>
     <template #body>
-      <FadeStagger
-        delay-interval="300"
-        list-container-tag="div"
-        class="projects__list"
+      <Carousel
+        v-if="featuredProjectsList.length"
+        tabbed="true"
+        auto="true"
+        timer="3"
+        :list="featuredProjectsList"
+        class="projects__carousel"
       >
-        <template v-if="featuredProjectsList.length">
-          <div
+        <template #tabs="{ selectTab, currentIndex }">
+          <a
             v-for="(project, index) in featuredProjectsList"
             :key="project.name"
-            :data-index="index"
-            class="projects__item"
+            @click="selectTab(index)"
+            :class="{ selected: currentIndex === index }"
+            class="projects__tab"
           >
             <Vsvg
               :name="project.logo"
-              width="40"
-              height="40"
+              width="1.7rem"
+              height="1.7rem"
               stroke-color="#bbca61"
             ></Vsvg>
             {{ project.name }}
-          </div>
+          </a>
         </template>
-      </FadeStagger>
+        <template #previous="{ prev }">
+          <a @click="prev()" class="projects__previous">
+            <Vsvg
+              name="arrowLeft"
+              width="5rem"
+              height="5rem"
+              stroke-color="#bbca61"
+            ></Vsvg>
+          </a>
+        </template>
+        <template #views="{ view }">
+          <div
+            :style="{ 'backgroundImage': `url(${view.img})` }"
+            class="projects__view"
+          ></div>
+        </template>
+        <template #next="{ next }">
+          <a @click="next()" class="projects__next">
+            <Vsvg
+              name="arrowRight"
+              width="5rem"
+              height="5rem"
+              stroke-color="#bbca61"
+            ></Vsvg>
+          </a>
+        </template>
+        <template #footer="{ currentIndex, selectView }">
+          <a
+            v-for="(project, index) in featuredProjectsList"
+            :key="project.name"
+            @click="selectView(index)"
+            :class="{ selected: currentIndex === index }"
+            class="projects__pointer"
+          ></a>
+        </template>
+      </Carousel>
     </template>
   </Card>
 
@@ -152,52 +201,82 @@
       <h1 class="experience__header">
         <Vsvg
           name="userFolder"
-          width="40"
-          height="40"
+          width="1.7rem"
+          height="1.7rem"
           stroke-color="#86451a"
         ></Vsvg>
         {{ experienceTitle }}
         <Vsvg
           :hidden="experienceList.length"
           name="caretDown"
-          width="30"
-          height="30"
+          width="1.7rem"
+          height="1.7rem"
           stroke-color="#86451a"
         ></Vsvg>
       </h1>
     </template>
     <template #body>
-      <div class="projects__list">
-        <div class="projects__item"></div>
-      </div>
+      <FadeStagger
+        delay-interval="40"
+        list-container-tag="div"
+        class="skills__list"
+      >
+        <template v-if="skillsList.length">
+          <div
+            v-for="(skill, index) in skillsList"
+            :key="skill.name"
+            :data-index="index"
+            class="skills__item"
+          >
+            <a :href="skill.link" target="_" class="skills__link">
+              <img :src="skill.img" alt="" />
+              {{ skill.name }}
+            </a>
+          </div>
+        </template>
+      </FadeStagger>
     </template>
   </Card>
+
   <Card class="blog">
     <template #header>
       <h1 class="blog__header">
         <Vsvg
           name="news"
-          width="40"
-          height="40"
+          width="1.7rem"
+          height="1.7rem"
           stroke-color="rgba(77, 79, 85, 0.7)"
         ></Vsvg>
         {{ blogTitle }}
         <Vsvg
           :hidden="experienceList.length"
           name="caretDown"
-          width="30"
-          height="30"
+          width="1.7rem"
+          height="1.7rem"
           stroke-color="rgba(77, 79, 85, 0.7)"
         ></Vsvg>
       </h1>
     </template>
     <template #body>
-      <div class="projects__list">
-        <div class="projects__item"></div>
-      </div>
+      <FadeStagger
+        delay-interval="40"
+        list-container-tag="div"
+        class="skills__list"
+      >
+        <template v-if="skillsList.length">
+          <div
+            v-for="(skill, index) in skillsList"
+            :key="skill.name"
+            :data-index="index"
+            class="skills__item"
+          >
+            <a :href="skill.link" target="_" class="skills__link">
+              <img :src="skill.img" alt="" />
+              {{ skill.name }}
+            </a>
+          </div>
+        </template>
+      </FadeStagger>
     </template>
   </Card>
-  <Banner class="games">
-    <template #body> </template>
-  </Banner>
 </div>

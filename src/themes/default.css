@@ -1,0 +1,20 @@
+[data-theme="default"] {
+  --base: rgba(185, 185, 201, 0.8);
+  --base2: rgba(35, 50, 92, 0.3);
+  --base3: rgba(88, 105, 146, 0.3);
+  --base4: rgba(108, 38, 129, 0.7);
+  --base5: rgba(64, 18, 82, 0.7);
+  --accent: rgba(48, 104, 139, 0.8);
+  --accent2: rgba(23, 82, 131, 0.9);
+  --accent3: #20407c;
+  --accent4: #af7825;
+  --accent5: #b3642f;
+  --highlight: #bbca61;
+  --highlight2: #abad5b;
+  --highlight3: #e26e40;
+  --highlight4: #c9dfe0;
+  --shadow: rgba(30, 30, 68, 0.7);
+  --shadow3: rgba(113, 115, 121, 0.7);
+  --shadow4: rgba(90, 92, 97, 0.7);
+  --shadow5: rgba(43, 46, 85, 0.7);
+}

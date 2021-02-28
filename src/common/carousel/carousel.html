@@ -1,0 +1,27 @@
+<div class="carousel">
+  <div v-if="tabbed" class="carousel__tabs">
+    <slot
+      name="tabs"
+      :select-tab="showViewTab"
+      :current-index="currentViewIndex"
+      class="carousel__tabs"
+    ></slot>
+  </div>
+  <div @mouseover="pause()" @mouseout="play()" class="carousel__views">
+    <slot
+      name="previous"
+      :prev="showPrevious"
+      class="carousel__previous"
+    ></slot>
+    <slot name="views" :view="currentView" class="carousel__view"></slot>
+    <slot name="next" :next="showNext" class="carousel__next"></slot>
+  </div>
+  <div class="carousel__footer">
+    <slot
+      name="footer"
+      :select-view="showViewTab"
+      :current-index="currentViewIndex"
+      class="carousel__footer"
+    ></slot>
+  </div>
+</div>

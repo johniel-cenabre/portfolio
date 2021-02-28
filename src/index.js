@@ -1,5 +1,5 @@
 import './style.css'
-import './themes/dark.css'
+import themes from './themes'
 import animations from './animations'
 import common from './common'
 import pages from './pages'
@@ -8,7 +8,31 @@ import router from './router'
 const App = Vue.createApp({
   data() {
     return {
-      theme: 'dark'
+      windowWidth: window.innerWidth
+    }
+  },
+  methods: {
+    updateWindowWidth() {
+      this.windowWidth = window.innerWidth
+    },
+    selectTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme)
+    }
+  },
+  mounted() {
+    this.$nextTick(() => {
+      window.addEventListener('resize', this.updateWindowWidth)
+      this.selectTheme('default')
+    })
+  },
+  beforeUnmounted() {
+    this.$nextTick(() => {
+      window.removeEventListener('resize')
+    })
+  },
+  computed: {
+    isLarge: function () {
+      return this.windowWidth >= 1200
     }
   }
 })

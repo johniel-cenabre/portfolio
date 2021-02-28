@@ -22,20 +22,39 @@ const Home = {
     }
   },
   methods: {
-    showAllSkills: function () {
+    showAllIfLarge() {
+      if (window.innerWidth >= 1200) {
+        this.showAllSkills()
+        this.showAllServices()
+        this.showFeaturedProjectsList()
+      }
+    },
+    showAllSkills() {
       this.skillsList = skills
     },
-    showAllServices: function () {
+    showAllServices() {
       this.servicesList = services
     },
-    changeServicesBackground: function (img) {
+    changeServicesBackground(img) {
       const servicesCard = this.$refs.servicesCard.$el
       const DEFAULT_GRADIENT = `linear-gradient(to right, var(--accent4), var(--accent5))`
       servicesCard.style.backgroundImage = img ? `url(${img})` : DEFAULT_GRADIENT
     },
-    showFeaturedProjectsList: function () {
+    showFeaturedProjectsList() {
       this.featuredProjectsList = projects.filter(project => project.featured)
     }
+  },
+  mounted() {
+    this.$nextTick(() => {
+      window.addEventListener('resize', this.showAllIfLarge)
+
+      this.showAllIfLarge()
+    })
+  },
+  beforeUnmount() {
+    this.$nextTick(() => {
+      window.removeEventListener('resize', this.showAllIfLarge)
+    })
   }
 }
 

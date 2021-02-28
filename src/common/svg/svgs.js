@@ -1,6 +1,32 @@
 const svgs = {
   customize: (name, width, height, strokeColor, backgroundColor = 'none', fillColor = 'none') => {
     return {
+      arrowLeft:
+        `<svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        width="${width}"
+        height="${height}"
+      >
+        <path fill="${backgroundColor}" d="M0 0h24v24H0z" />
+        <path
+          d="M10.828 12l4.95 4.95-1.414 1.414L8 12l6.364-6.364 1.414 1.414z"
+          fill="${strokeColor}"
+        />
+      </svg>`,
+      arrowRight:
+        `<svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        width="${width}"
+        height="${height}"
+      >
+        <path fill="${backgroundColor}" d="M0 0h24v24H0z" />
+        <path
+          d="M13.172 12l-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414z"
+          fill="${strokeColor}"
+        />
+      </svg>`,
       caretDown:
         `<svg
           xmlns="http://www.w3.org/2000/svg"
@@ -8,7 +34,7 @@ const svgs = {
           width="${width}"
           height="${height}"
         >
-          <path fill="none" d="M0 0h24v24H0z" />
+          <path fill="${backgroundColor}" d="M0 0h24v24H0z" />
           <path
             d="M12 13.172l4.95-4.95 1.414 1.414L12 16 5.636 9.636 7.05 8.222z"
             fill="${strokeColor}"

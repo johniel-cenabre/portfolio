@@ -26,7 +26,7 @@ export const skills = [
   },
   {
     name: 'php',
-    img: 'https://img.icons8.com/officel/58/000000/php-logo.png',
+    img: 'https://img.icons8.com/officel/40/000000/php-logo.png',
     link: 'https://icons8.com/icon/fAMVO_fuoOuC/php-logo'
   },
   {
