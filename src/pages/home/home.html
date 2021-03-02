@@ -112,7 +112,7 @@
     </template>
   </Card>
 
-  <Card class="projects" @mouseenter="showFeaturedProjectsList">
+  <Card class="projects" @mouseenter="showFeaturedProjects">
     <template #header>
       <h1 class="projects__header">
         <Vsvg
@@ -196,7 +196,7 @@
     </template>
   </Card>
 
-  <Card class="experience">
+  <Card class="experience" @mouseenter="showAllExperience">
     <template #header>
       <h1 class="experience__header">
         <Vsvg
@@ -219,19 +219,32 @@
       <FadeStagger
         delay-interval="40"
         list-container-tag="div"
-        class="skills__list"
+        class="experience__list"
       >
-        <template v-if="skillsList.length">
+        <template v-if="experienceList.length">
           <div
-            v-for="(skill, index) in skillsList"
-            :key="skill.name"
+            v-for="(experience, index) in experienceList"
+            :key="index"
             :data-index="index"
-            class="skills__item"
+            class="experience__item"
           >
-            <a :href="skill.link" target="_" class="skills__link">
-              <img :src="skill.img" alt="" />
-              {{ skill.name }}
-            </a>
+            <div class="experience__company">
+              <a href="" class="company__logo">
+                <img :src="experience.logo" alt="" />
+              </a>
+              <div class="company__name">
+                <span>{{ experience.company }}</span>
+                <span>{{ experience.position }}</span>
+              </div>
+            </div>
+            <div class="experience__stack">
+              <span
+                v-for="(tech, index) in experience.stack"
+                class="experience__tech chip"
+              >
+                {{ tech }}
+              </span>
+            </div>
           </div>
         </template>
       </FadeStagger>

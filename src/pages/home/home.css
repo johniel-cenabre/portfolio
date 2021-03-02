@@ -89,6 +89,11 @@
   text-align: center;
 }
 
+.skills__link > * {
+  width: 3rem;
+  margin: 0 auto;
+}
+
 .services {
   gap: 3%;
   background-image: linear-gradient(to right, var(--accent4), var(--accent5));
@@ -226,6 +231,7 @@
 }
 
 .experience {
+  gap: 7%;
   background-image: linear-gradient(to right, var(--accent), var(--accent2));
   background-position: top;
 }
@@ -233,6 +239,70 @@
 .experience__header {
   filter: brightness(2);
   color: var(--accent5);
+}
+
+.experience__list {
+  width: 100%;
+  row-gap: 5%;
+  display: grid;
+  grid-template: repeat(4, 0.2fr) / 1fr;
+}
+
+.experience__list * {
+  color: var(--accent2);
+}
+
+.experience__item {
+  padding: 5%;
+  border-radius: 12px;
+  background-image: linear-gradient(
+    to right,
+    var(--highlight4),
+    var(--highlight2)
+  );
+  transition: all 0.2s cubic-bezier(0.39, 0.575, 0.565, 1);
+}
+
+.experience__company {
+  column-gap: 7%;
+  display: flex;
+  align-items: center;
+}
+
+.company__logo > * {
+  width: 2.7rem;
+  border: 2px solid var(--highlight3);
+  border-radius: 7px;
+  text-shadow: 2px 3px var(--shadow2);
+}
+
+.company__name {
+  display: grid;
+}
+
+.company__name :first-child {
+  font-weight: 700;
+}
+
+.company__name :last-child {
+  font-size: 1.05rem;
+}
+
+.experience__stack {
+  gap: 3%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.experience__tech {
+  color: var(--highlight4);
+  margin-top: 3%;
+  font-size: 0.7rem;
+  border: 1px solid var(--highlight4);
+  background-color: var(--accent4);
+  transition: all 0.5s cubic-bezier(0.39, 0.575, 0.565, 1);
 }
 
 .blog {

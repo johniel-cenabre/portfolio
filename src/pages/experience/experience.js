@@ -1,42 +1,47 @@
+import fst from '../../assets/logo/fst.png'
+import pntm from '../../assets/logo/pntm.png'
+
 export const experience = [
   {
     company: 'Fullspeed Technologies Inc.',
-    location: 'IT park, Cebu City',
-    logo: '',
+    location: 'IT Park, Cebu City',
+    logo: fst,
     position: 'Software Engineer',
     stack: [
-      'js',
-      'jquery',
-      'php',
-      'laravel',
-      'docker'
+      'JS',
+      'JQuery',
+      'PHP',
+      'Laravel',
+      'Docker',
+      'Jira'
     ],
     responsibilities: [
       'documentation',
       'development',
-      'debugging',
       'deployment',
+      'debugging',
       'testing'
     ]
   },
   {
     company: 'Panteum',
     location: 'Singapore',
-    logo: '',
+    logo: pntm,
     position: 'Software Developer',
     stack: [
-      'js',
-      'nodejs',
-      'rust',
-      'blockchain',
-      'network'
+      'JS',
+      'NodeJS',
+      'Rust',
+      'Blockchain'
     ],
     responsibilities: [
       'documentation',
       'development',
-      'debugging',
       'deployment',
-      'testing'
+      'debugging',
+      'testing',
+      'network security',
+      'cryptography'
     ]
   }
 ]

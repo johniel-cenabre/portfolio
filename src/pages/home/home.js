@@ -2,12 +2,13 @@ import './home.css'
 import { skills } from '../skills/skills'
 import { services } from '../services/services'
 import { projects } from '../projects/projects'
+import { experience } from '../experience/experience'
 
 const Home = {
   template: require('./home.html').default,
   data() {
     return {
-      position: 'Software Engineer',
+      position: 'Software Developer',
       name: 'Johniel Judah Cenabre',
       skillsTitle: 'Skills',
       skillsList: [],
@@ -26,7 +27,8 @@ const Home = {
       if (window.innerWidth >= 1200) {
         this.showAllSkills()
         this.showAllServices()
-        this.showFeaturedProjectsList()
+        this.showFeaturedProjects()
+        this.showAllExperience()
       }
     },
     showAllSkills() {
@@ -40,9 +42,12 @@ const Home = {
       const DEFAULT_GRADIENT = `linear-gradient(to right, var(--accent4), var(--accent5))`
       servicesCard.style.backgroundImage = img ? `url(${img})` : DEFAULT_GRADIENT
     },
-    showFeaturedProjectsList() {
+    showFeaturedProjects() {
       this.featuredProjectsList = projects.filter(project => project.featured)
-    }
+    },
+    showAllExperience() {
+      this.experienceList = experience
+    },
   },
   mounted() {
     this.$nextTick(() => {
