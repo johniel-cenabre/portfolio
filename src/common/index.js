@@ -2,6 +2,7 @@ import Vsvg from './svg/svg'
 import Banner from './banner/banner'
 import Card from './card/card'
 import Carousel from './carousel/carousel'
+import Chip from './chip/chip'
 import Footer from './footer/footer'
 import Modal from './modal/modal'
 import Sidenav from './sidenav/sidenav'
@@ -13,6 +14,7 @@ export default {
   Banner,
   Card,
   Carousel,
+  Chip,
   Footer,
   Modal,
   Sidenav,
