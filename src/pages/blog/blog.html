@@ -1,1 +1,8 @@
-<h1>{{ text }}</h1>
+<div class="page">
+  <img :src="blog.img" alt="" class="blog__img">
+  <p class="blog__title">{{ blog.title }}</p>
+  <div v-for="(content, index) in blog.content" class="blog__content">
+    <div class="blog__text" v-html="content.text"></div>
+    <img :src="content.img" alt="" class="blog__img">
+  </div>
+</div>

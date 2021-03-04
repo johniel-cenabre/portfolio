@@ -1,4 +1,4 @@
-.card__header h1 > :last-child {
+.caret-down {
   margin: 0 0 0 auto;
 }
 
@@ -13,29 +13,56 @@
   width: 85%;
 }
 
+.profile {
+  padding: 1.5rem;
+}
+
+.profile .card__body {
+  display: grid;
+  justify-items: center;
+}
+
+.profile__image {
+  width: 100%;
+  border-radius: 50%;
+}
+
 .profile__info {
-  padding: 1.5rem 0;
-  align-self: flex-end;
+  display: grid;
+  justify-items: center;
+}
+
+.profile__info > * {
+  padding: 0.3rem 0.4rem;
 }
 
 .profile__position,
 .profile__name {
   font-weight: 600;
   text-shadow: 2px 3px var(--shadow2);
-  text-align: right;
+  text-align: center;
 }
 
 .profile__position {
-  gap: 10px;
   font-size: 1rem;
-  display: flex;
-  align-items: center;
 }
 
 .profile__name {
   color: var(--accent3);
   font-size: 0.75rem;
   transition: all 0.3 ease-in-out;
+}
+
+.profile__email {
+  color: var(--accent3);
+  font-size: 0.7rem;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.profile__email:hover {
+  color: var(--shadow);
+  background-color: var(--highlight4);
 }
 
 .skills {
@@ -61,7 +88,7 @@
   column-gap: 1.5%;
   row-gap: 1.5%;
   display: grid;
-  grid-template: repeat(5, 0.5fr) / repeat(3, 1fr);
+  grid-template: repeat(5, 0.7fr) / repeat(3, 1fr);
   justify-items: center;
   align-items: end;
 }
@@ -121,6 +148,7 @@
   display: flex;
   align-items: center;
   transition: all 0.2s ease-in-out;
+  cursor: pointer;
 }
 
 .services__item:hover {
@@ -156,6 +184,7 @@
   justify-content: center;
   border-bottom: 3px solid transparent;
   transition: all 0.3s ease-in-out;
+  cursor: pointer;
 }
 
 .projects__tab:hover {
@@ -191,6 +220,7 @@
   position: absolute;
   pointer-events: none;
   transition: all 0.3s cubic-bezier(0.39, 0.575, 0.565, 1);
+  cursor: pointer;
 }
 
 .projects__previous {
@@ -219,6 +249,7 @@
   border: 2px solid var(--highlight2);
   border-radius: 50%;
   transition: all 0.3s ease-in-out;
+  cursor: pointer;
 }
 
 .projects__pointer:hover {
@@ -231,7 +262,7 @@
 }
 
 .experience {
-  gap: 7%;
+  gap: 5%;
   background-image: linear-gradient(to right, var(--accent), var(--accent2));
   background-position: top;
 }
@@ -261,6 +292,13 @@
     var(--highlight2)
   );
   transition: all 0.2s cubic-bezier(0.39, 0.575, 0.565, 1);
+  cursor: pointer;
+}
+
+.experience__item:hover .experience__tech {
+  color: var(--accent4);
+  border: 1px solid var(--accent4);
+  background-color: var(--highlight4);
 }
 
 .experience__company {
@@ -314,7 +352,55 @@
   color: var(--shadow3);
 }
 
-@media (min-width: 777px) {
+.blog__item {
+  margin-top: 5%;
+}
+
+.blog__img {
+  width: 100%;
+}
+
+.blog__info {
+  margin-bottom: 1.3rem;
+  padding: 1rem;
+  background-color: var(--shadow);
+  row-gap: 10px;
+  display: grid;
+  cursor: pointer;
+}
+
+.blog__title {
+  color: var(--highlight4);
+  font-weight: 700;
+}
+
+.blog__info:hover {
+  background-color: var(--base5);
+}
+
+.blog__intro {
+  font-size: 0.9rem;
+}
+
+@media (min-width: 400px) {
+  .skills__list {
+    grid-template: repeat(4, 0.5fr) / repeat(4, 1fr);
+  }
+
+  .profile .card__body {
+    display: flex;
+  }
+  
+  .profile__image {
+    width: 150px;
+  }
+  
+  .profile__info {
+    justify-items: end;
+  }
+}
+
+@media (min-width: 800px) {
   .profile,
   .skills,
   .services,
@@ -323,10 +409,6 @@
   .blog {
     margin: 1rem;
     width: 50%;
-  }
-
-  .skills__list {
-    grid-template: repeat(4, 0.5fr) / repeat(4, 1fr);
   }
 }
 

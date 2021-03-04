@@ -1,7 +1,7 @@
 export const themes = [
-  'default',
-  'dark'
+  'dark',
+  'light'
 ]
 
-import './default.css'
 import './dark.css'
+import './light.css'

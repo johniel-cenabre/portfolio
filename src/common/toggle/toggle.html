@@ -1,0 +1,9 @@
+<div class="toggle">
+  <span class="toggle__text" :class="{ toggled: isOn }">{{ onText }}</span>
+  <a
+    class="toggle__button"
+    :class="{ on: isOn, off: !isOn }"
+    @click="toggle"
+  ></a>
+  <span class="toggle__text" :class="{ toggled: !isOn }">{{ offText }}</span>
+</div>

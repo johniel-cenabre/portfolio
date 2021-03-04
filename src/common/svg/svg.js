@@ -1,4 +1,4 @@
-import svgs from './svgs'
+import { customizeSvg } from './svgs'
 
 const Vsvg = {
   template: require('./svg.html').default,
@@ -12,7 +12,7 @@ const Vsvg = {
   ],
   computed: {
     svg: function () {
-      return svgs.customize(
+      return customizeSvg(
         this.name,
         this.width,
         this.height,

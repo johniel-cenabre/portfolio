@@ -15,10 +15,14 @@
   <body>
     <div id="app">
       <header>
-        <Banner v-if="isLarge"></Banner>
         <Top>
           <template #right>
-            <a @click="selectTheme('dark')">dark</a>
+            <Toggle
+              on-text="light"
+              off-text="dark"
+              :on-change="selectTheme"
+              class="theme__toggle"
+            ></Toggle>
           </template>
         </Top>
       </header>

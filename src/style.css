@@ -2,6 +2,7 @@
   font-family: Arial, Helvetica, sans-serif;
   letter-spacing: 2px;
   color: var(--highlight);
+  transition: all 0.3s ease-in-out;
 }
 
 a {
@@ -29,6 +30,7 @@ body {
 }
 
 .page {
+  min-height: 800px;
   margin: 2rem 0;
   padding: 1rem 1rem 0;
   display: flex;
@@ -39,6 +41,19 @@ body {
 .page__header {
   font-size: 2rem;
   color: var(--highlight2);
+}
+
+.theme__toggle .toggle__button.on::after {
+  background-color: var(--accent);
+}
+
+.theme__toggle .toggle__button.off::after {
+  background-color: var(--shadow3);
+}
+
+.theme__toggle .toggle__text {
+  color: var(--highlight4);
+  filter: brightness(0.7);
 }
 
 .games {

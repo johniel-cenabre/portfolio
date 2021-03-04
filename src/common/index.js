@@ -7,6 +7,7 @@ import Footer from './footer/footer'
 import Modal from './modal/modal'
 import Sidenav from './sidenav/sidenav'
 import Snackbar from './snackbar/snackbar'
+import Toggle from './toggle/toggle'
 import Table from './table/table'
 import Top from './top/top'
 
@@ -19,6 +20,7 @@ export default {
   Modal,
   Sidenav,
   Snackbar,
+  Toggle,
   Table,
   Top,
   Vsvg

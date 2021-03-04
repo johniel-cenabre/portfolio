@@ -1,24 +1,22 @@
-import mapApp from '../../assets/img/map-app.jpg'
-import mediaApp from '../../assets/img/media-app.jpg'
-import trendApp from '../../assets/img/trend-app.jpg'
+import { GOOGLE_DRIVE_IMG } from '../../constants/links'
 
 export const projects = [
   {
     name: 'Mapster',
     logo: 'mapPinUser',
-    img: mapApp,
+    img: GOOGLE_DRIVE_IMG+'1KIPjSsjNtia4erfPC5FeNwg_c5am_qOn',
     featured: true
   },
   {
     name: 'Median',
     logo: 'film',
-    img: mediaApp,
+    img: GOOGLE_DRIVE_IMG+'1NdQRepjrArULFqfuka0pceh7fa_KOLSh',
     featured: true
   },
   {
     name: 'Trendr',
     logo: 'thumbUp',
-    img: trendApp,
+    img: GOOGLE_DRIVE_IMG+'1N5hLLCSOXK9Xv58RM-cTTiGIDb71FQIA',
     featured: true
   }
 ]

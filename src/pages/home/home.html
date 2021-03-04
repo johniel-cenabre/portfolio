@@ -1,25 +1,11 @@
 <div class="page">
   <Card class="profile">
     <template #body>
-      <div class="profile__image">
-        <Vsvg
-          name="userStar"
-          width="5rem"
-          height="5rem"
-          stroke-color="#3d6bc2"
-        ></Vsvg>
-      </div>
+      <img :src="profile.img" alt="" class="profile__image">
       <div class="profile__info">
-        <h1 class="profile__position">
-          <Vsvg
-            name="pc"
-            width="1.3rem"
-            height="1.3rem"
-            stroke-color="#bbca61"
-          ></Vsvg>
-          {{ position }}
-        </h1>
-        <h1 class="profile__name">{{ name }}</h1>
+        <span class="profile__position">{{ profile.position }}</span>
+        <span class="profile__name">{{ profile.name }}</span>
+        <a class="profile__email">{{ profile.email }}</a>
       </div>
     </template>
   </Card>
@@ -35,10 +21,11 @@
         ></Vsvg>
         {{ skillsTitle }}
         <Vsvg
-          :hidden="skillsList.length"
+          v-if="!skillsList.length"
           name="caretDown"
           width="1.7rem"
           height="1.7rem"
+          class="caret-down"
         ></Vsvg>
       </h1>
     </template>
@@ -76,11 +63,12 @@
         ></Vsvg>
         {{ servicesTitle }}
         <Vsvg
-          :hidden="servicesList.length"
+          v-if="!servicesList.length"
           name="caretDown"
           width="1.7rem"
           height="1.7rem"
           stroke-color="#c9dfe0"
+          class="caret-down"
         ></Vsvg>
       </h1>
     </template>
@@ -123,26 +111,27 @@
         ></Vsvg>
         {{ projectsTitle }}
         <Vsvg
-          :hidden="featuredProjectsList.length"
+          v-if="!featuredProjects.length"
           name="caretDown"
           width="1.7rem"
           height="1.7rem"
           stroke-color="#bbca61"
+          class="caret-down"
         ></Vsvg>
       </h1>
     </template>
     <template #body>
       <Carousel
-        v-if="featuredProjectsList.length"
+        v-if="featuredProjects.length"
         tabbed="true"
         auto="true"
         timer="3"
-        :list="featuredProjectsList"
+        :list="featuredProjects"
         class="projects__carousel"
       >
         <template #tabs="{ selectTab, currentIndex }">
           <a
-            v-for="(project, index) in featuredProjectsList"
+            v-for="(project, index) in featuredProjects"
             :key="project.name"
             @click="selectTab(index)"
             :class="{ selected: currentIndex === index }"
@@ -185,7 +174,7 @@
         </template>
         <template #footer="{ currentIndex, selectView }">
           <a
-            v-for="(project, index) in featuredProjectsList"
+            v-for="(project, index) in featuredProjects"
             :key="project.name"
             @click="selectView(index)"
             :class="{ selected: currentIndex === index }"
@@ -207,11 +196,12 @@
         ></Vsvg>
         {{ experienceTitle }}
         <Vsvg
-          :hidden="experienceList.length"
+          v-if="!experienceList.length"
           name="caretDown"
           width="1.7rem"
           height="1.7rem"
           stroke-color="#86451a"
+          class="caret-down"
         ></Vsvg>
       </h1>
     </template>
@@ -251,7 +241,7 @@
     </template>
   </Card>
 
-  <Card class="blog">
+  <Card class="blog" @mouseenter="showfeaturedBlog">
     <template #header>
       <h1 class="blog__header">
         <Vsvg
@@ -262,11 +252,12 @@
         ></Vsvg>
         {{ blogTitle }}
         <Vsvg
-          :hidden="experienceList.length"
+          v-if="!featuredBlog.length"
           name="caretDown"
           width="1.7rem"
           height="1.7rem"
           stroke-color="rgba(77, 79, 85, 0.7)"
+          class="caret-down"
         ></Vsvg>
       </h1>
     </template>
@@ -274,19 +265,21 @@
       <FadeStagger
         delay-interval="40"
         list-container-tag="div"
-        class="skills__list"
+        class="blog__list"
       >
-        <template v-if="skillsList.length">
+        <template v-if="featuredBlog.length">
           <div
-            v-for="(skill, index) in skillsList"
-            :key="skill.name"
+            v-for="(blog, index) in featuredBlog"
+            :key="blog.img"
             :data-index="index"
-            class="skills__item"
+            class="blog__item"
           >
-            <a :href="skill.link" target="_" class="skills__link">
-              <img :src="skill.img" alt="" />
-              {{ skill.name }}
-            </a>
+            <img :src="blog.img" alt="" class="blog__img" />
+            <router-link :to="{ name: 'blog', params: { index } }" class="blog__info">
+              <span class="blog__title">{{ blog.title }}</span>
+              <span class="blog__intro">{{ blog.intro }}</span>
+              <span class="blog__date">{{ blog.date }}</span>
+            </router-link>
           </div>
         </template>
       </FadeStagger>

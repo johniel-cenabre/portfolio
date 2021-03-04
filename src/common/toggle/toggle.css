@@ -1,0 +1,43 @@
+.toggle {
+  gap: 0.7rem;
+  display: flex;
+}
+
+.toggle__button {
+  width: 40px;
+  border-radius: 30px;
+  background-color: whitesmoke;
+  display: flex;
+  position: relative;
+  cursor: pointer;
+}
+
+.toggle__button::after {
+  content: "";
+  border-radius: 30px;
+  width: 20px;
+  height: 90%;
+  margin: 0.1rem;
+  position: absolute;
+  align-self: center;
+  transition: all 0.2s cubic-bezier(0.895, 0.03, 0.685, 0.22);
+}
+
+.toggle__button.on::after {
+  left: 0;
+  background-color: rgb(100, 162, 219);
+}
+
+.toggle__button.off::after {
+  left: 40%;
+  background-color: rgb(143, 141, 141);
+}
+
+.toggle__text {
+  color: rgb(153, 148, 148);
+  filter: brightness(0.7);
+}
+
+.toggle__text.toggled {
+  filter: brightness(1);
+}

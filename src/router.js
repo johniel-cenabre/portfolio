@@ -1,6 +1,6 @@
 import Home from './pages/home/home'
 import Blog from './pages/blog/blog'
-// import Contact from './pages/contact'
+// import Profile from './pages/profile'
 // import Experience from './pages/experience'
 // import Games from './pages/games'
 // import Projects from './pages/projects'
@@ -11,15 +11,18 @@ const router = new VueRouter.createRouter({
   routes: [
     {
       path: '/',
+      name: 'home',
       component: Home
     },
     {
       path: '/blog',
-      component: Blog
+      name: 'blog',
+      component: Blog,
+      props: true
     },
     // {
-    //   path: '/contact',
-    //   component: Contact
+    //   path: '/profile',
+    //   component: Profile
     // },
     // {
     //   path: '/experience',

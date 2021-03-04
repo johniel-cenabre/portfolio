@@ -1,25 +1,26 @@
 import './home.css'
+import { profile } from '../profile/profile'
 import { skills } from '../skills/skills'
 import { services } from '../services/services'
 import { projects } from '../projects/projects'
 import { experience } from '../experience/experience'
+import { blog } from '../blog/blog'
 
 const Home = {
   template: require('./home.html').default,
   data() {
     return {
-      position: 'Software Developer',
-      name: 'Johniel Judah Cenabre',
+      profile,
       skillsTitle: 'Skills',
       skillsList: [],
       servicesTitle: 'Services',
       servicesList: [],
       projectsTitle: 'Projects',
-      featuredProjectsList: [],
+      projectsList: [],
       experienceTitle: 'Experience',
       experienceList: [],
       blogTitle: 'Blog',
-      blogFeatured: []
+      blogList: []
     }
   },
   methods: {
@@ -29,6 +30,7 @@ const Home = {
         this.showAllServices()
         this.showFeaturedProjects()
         this.showAllExperience()
+        this.showfeaturedBlog()
       }
     },
     showAllSkills() {
@@ -43,11 +45,14 @@ const Home = {
       servicesCard.style.backgroundImage = img ? `url(${img})` : DEFAULT_GRADIENT
     },
     showFeaturedProjects() {
-      this.featuredProjectsList = projects.filter(project => project.featured)
+      this.projectsList = projects
     },
     showAllExperience() {
       this.experienceList = experience
     },
+    showfeaturedBlog() {
+      this.blogList = blog
+    }
   },
   mounted() {
     this.$nextTick(() => {
@@ -60,6 +65,14 @@ const Home = {
     this.$nextTick(() => {
       window.removeEventListener('resize', this.showAllIfLarge)
     })
+  },
+  computed: {
+    featuredProjects: function () {
+      return this.projectsList.filter(project => project.featured)
+    },
+    featuredBlog: function () {
+      return this.blogList.filter(blog => blog.featured)
+    }
   }
 }
 

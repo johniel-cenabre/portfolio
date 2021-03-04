@@ -1,22 +1,20 @@
-import webdev from  '../../assets/img/webdev.jpg'
-import webdes from  '../../assets/img/webdes.jpg'
-import sofeng from  '../../assets/img/sofeng.jpg'
+import { GOOGLE_DRIVE_IMG } from '../../constants/links'
 
 export const services = [
   {
     name: 'Fullstack Web Development',
     logo: 'stack',
-    img: webdev
+    img: GOOGLE_DRIVE_IMG+'1XBYx_mxT7Gz8HG_Shvbs8Gp9AWTQBSIX'
   },
   {
     name: 'Web Design',
     logo: 'layout',
-    img: webdes
+    img: GOOGLE_DRIVE_IMG+'1TAembgPEUqnFks79aijNqt7VPtJZYSJM'
   },
   {
     name: 'Software Engineering',
     logo: 'gear',
-    img: sofeng
+    img: GOOGLE_DRIVE_IMG+'1t7aa9ykLvVXMnscK-qxwSI98VmqBaA2l'
   }
 ]
 

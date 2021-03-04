@@ -1,5 +1,5 @@
 import './style.css'
-import themes from './themes'
+import { themes } from './themes'
 import animations from './animations'
 import common from './common'
 import pages from './pages'
@@ -22,7 +22,7 @@ const App = Vue.createApp({
   mounted() {
     this.$nextTick(() => {
       window.addEventListener('resize', this.updateWindowWidth)
-      this.selectTheme('default')
+      this.selectTheme(themes[0])
     })
   },
   beforeUnmounted() {
