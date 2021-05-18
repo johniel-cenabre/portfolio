@@ -1,10 +1,23 @@
 import './home.css'
-import { profile } from '../profile/profile'
-import { skills } from '../skills/skills'
-import { services } from '../services/services'
-import { projects } from '../projects/projects'
-import { experience } from '../experience/experience'
-import { blog } from '../blog/blog'
+import { profile } from '../profile'
+import { skills } from '../skills'
+import { services } from '../services'
+import { projects } from '../projects'
+import { experience } from '../experience'
+import { parseCsv, parseRow } from '../../util/csv-parser'
+import {
+  GOOGLE_DRIVE_IMG,
+  GOOGLE_DRIVE_BLOG_CSV
+} from '../../constants/links'
+import {
+  BLOG_COLUMNS,
+  DATE_COLUMN,
+  TITLE_COLUMN,
+  INTRO_COLUMN,
+  IMG_COLUMN,
+  CONTENT_COLUMN,
+  FEATURED_COLUMN
+} from '../../constants/blog'
 
 const Home = {
   template: require('./home.html').default,
@@ -20,10 +33,30 @@ const Home = {
       experienceTitle: 'Experience',
       experienceList: [],
       blogTitle: 'Blog',
-      blogList: []
+      blogList: [],
+      blogs: []
     }
   },
   methods: {
+    fetchBlogs() {
+      fetch(GOOGLE_DRIVE_BLOG_CSV)
+        .then(res => parseCsv(res))
+        .then(rows => {
+          this.blogs = rows.map(row => {
+            const parsedRow = parseRow(row, BLOG_COLUMNS)
+            return {
+              id: parsedRow[CONTENT_COLUMN].replace(/^"|"$/g, ''),
+              date: parsedRow[DATE_COLUMN].replace(/^"|"$/g, ''),
+              title: parsedRow[TITLE_COLUMN].replace(/^"|"$/g, ''),
+              intro: parsedRow[INTRO_COLUMN].replace(/^"|"$/g, ''),
+              img: GOOGLE_DRIVE_IMG+parsedRow[IMG_COLUMN].replace(/^"|"$/g, ''),
+              featured: parsedRow[FEATURED_COLUMN].replace(/^"|"$/g, '').toLowerCase() === 'true'
+            }
+          })
+
+          this.showAllIfLarge()
+        })
+    },
     showAllIfLarge() {
       if (window.innerWidth >= 1200) {
         this.showAllSkills()
@@ -45,14 +78,17 @@ const Home = {
       servicesCard.style.backgroundImage = img ? `url(${img})` : DEFAULT_GRADIENT
     },
     showFeaturedProjects() {
-      this.projectsList = projects
+      this.projectsList = this.featuredProjects
     },
     showAllExperience() {
       this.experienceList = experience
     },
     showfeaturedBlog() {
-      this.blogList = blog
+      this.blogList = this.featuredBlog
     }
+  },
+  created() {
+    this.fetchBlogs()
   },
   mounted() {
     this.$nextTick(() => {
@@ -68,10 +104,10 @@ const Home = {
   },
   computed: {
     featuredProjects: function () {
-      return this.projectsList.filter(project => project.featured)
+      return projects.filter(project => project.featured)
     },
     featuredBlog: function () {
-      return this.blogList.filter(blog => blog.featured)
+      return this.blogs.filter(blog => blog.featured)
     }
   }
 }

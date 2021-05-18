@@ -1,11 +1,10 @@
 const { join } = require('path')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const config = {
 	entry: {
 		main: join(__dirname, './src/index.js'),
-		// vendor: join(__dirname, './src/vendor.js')
+		vendor: join(__dirname, './src/vendor.js')
 	},
 	output: {
 		path: join(__dirname, '../johniel-cenabre.github.io/')
@@ -42,7 +41,6 @@ const config = {
 	},
 	devtool: false,
 	plugins: [
-    // new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
 			showErrors: true,
 			cache: true,

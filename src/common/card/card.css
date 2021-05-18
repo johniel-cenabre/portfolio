@@ -4,15 +4,13 @@
   background-image: linear-gradient(to right, var(--base3), var(--base2));
   transition: all 0.2s ease-in-out;
   backface-visibility: hidden;
-  display: grid;
   overflow: hidden;
 }
 
 .card:hover {
-  transform: translateY(-5px);
-  transform: scale(1.03);
+  transform: translateY(-3px);
   filter: brightness(1.15);
-  box-shadow: 0.5px 7px 7px -7px var(--shadow);
+  box-shadow: 0.5px 12px 10px -3px var(--shadow);
   border: 1px solid var(--highlight3);
 }
 
@@ -21,10 +19,4 @@
   font-size: 1.3rem;
   display: flex;
   align-items: center;
-}
-
-.card__body {
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
 }

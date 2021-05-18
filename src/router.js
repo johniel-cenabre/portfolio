@@ -1,5 +1,5 @@
-import Home from './pages/home/home'
-import Blog from './pages/blog/blog'
+import Home from './pages/home'
+import Blog from './pages/blog'
 // import Profile from './pages/profile'
 // import Experience from './pages/experience'
 // import Games from './pages/games'
@@ -7,7 +7,8 @@ import Blog from './pages/blog/blog'
 // import Services from './pages/services'
 // import Skills from './pages/skills'
 
-const router = new VueRouter.createRouter({
+const router = VueRouter.createRouter({
+  history: VueRouter.createWebHistory(),
   routes: [
     {
       path: '/',
@@ -45,7 +46,9 @@ const router = new VueRouter.createRouter({
     //   component: Skills
     // },
   ],
-  history: VueRouter.createWebHistory()
+  scrollBehaviour() {
+    return { x : 0, y: 0 }
+  }
 })
 
 export default router

@@ -1,4 +1,11 @@
-export const customizeSvg = function (name, width, height, strokeColor, backgroundColor = 'none', fillColor = 'none') {
+function svgs(
+  name,
+  width,
+  height,
+  strokeColor,
+  backgroundColor = 'none',
+  fillColor = 'none'
+) {
   return {
     arrowLeft:
       `<svg
@@ -221,3 +228,5 @@ export const customizeSvg = function (name, width, height, strokeColor, backgrou
       </svg>`,
   }[name]
 }
+
+export default svgs

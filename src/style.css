@@ -48,7 +48,7 @@ body {
 }
 
 .theme__toggle .toggle__button.off::after {
-  background-color: var(--shadow3);
+  background-color: var(--shadow2);
 }
 
 .theme__toggle .toggle__text {
@@ -56,7 +56,10 @@ body {
   filter: brightness(0.7);
 }
 
-.games {
+footer {
   min-height: 40vh;
   background-image: linear-gradient(to right, var(--base), var(--shadow5));
+}
+
+@media (min-width: 1600px) {
 }

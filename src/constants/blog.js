@@ -1,0 +1,10 @@
+export const BLOG_COLUMNS = 6
+export const DATE_COLUMN = 0
+export const TITLE_COLUMN = 1
+export const INTRO_COLUMN = 2
+export const IMG_COLUMN = 3
+export const CONTENT_COLUMN = 4
+export const FEATURED_COLUMN = 5
+export const CONTENT_COLUMNS = 2
+export const TEXT_COLUMN = 0
+export const CONTENT_IMG_COLUMN = 1

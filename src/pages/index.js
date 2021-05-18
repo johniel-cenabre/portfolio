@@ -1,5 +1,5 @@
-import Home from './home/home'
-import Blog from './blog/blog'
+import Home from './home'
+import Blog from './blog'
 // import Contact from './pages/contact'
 // import Experience from './pages/experience'
 // import Games from './pages/games'

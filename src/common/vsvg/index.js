@@ -1,7 +1,7 @@
-import { customizeSvg } from './svgs'
+import customizeSvg from './svgs'
 
 const Vsvg = {
-  template: require('./svg.html').default,
+  template: require('./vsvg.html').default,
   props: [
     'name',
     'width',
