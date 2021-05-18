@@ -1,5 +1,10 @@
-### portfolio
+# portfolio
 
-# npm install
+### setup
+```npm install```
 
-# npm start
+### start dev
+```npm start```
+
+### build app
+```npm run build```
