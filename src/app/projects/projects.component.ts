@@ -123,8 +123,8 @@ export class ProjectsComponent {
       description: 'A modern portfolio website showcasing my work, skills, and experience. Built with Angular and Tailwind CSS.',
       type: 'personal',
       technologies: ['Angular', 'TypeScript', 'Tailwind CSS'],
-      url: '/',
-      githubUrl: 'https://github.com/yourusername/portfolio'
+      url: 'https://johniel-cenabre.github.io/portfolio',
+      githubUrl: 'https://github.com/johniel-cenabre/portfolio'
     },
     {
       title: 'Church Website',
@@ -132,7 +132,7 @@ export class ProjectsComponent {
       type: 'personal',
       technologies: ['React', 'TypeScript', 'Tailwind CSS'],
       url: 'https://www.jtwtl.site',
-      githubUrl: 'https://github.com/yourusername/portfolio'
+      githubUrl: 'https://github.com/johniel-cenabre/church-website'
     },
     {
       title: 'Task Management App',
