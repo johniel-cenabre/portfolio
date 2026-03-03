@@ -137,8 +137,8 @@ export class ProjectsComponent {
       title: 'Task Management App',
       description: 'A full-stack task management application with user authentication, real-time updates, and collaborative features.',
       type: 'personal',
-      technologies: ['Vue.js', 'Node.js', 'MongoDB', 'Socket.io'],
-      githubUrl: 'https://github.com/yourusername/task-manager'
+      technologies: ['Vue.js', 'Node.js', 'IndexedDB', 'Tailwind CSS'],
+      githubUrl: 'https://github.com/johniel-cenabre/task-manager'
     },
     {
       title: 'Weather Dashboard',
