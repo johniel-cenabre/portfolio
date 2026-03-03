@@ -123,7 +123,6 @@ export class ProjectsComponent {
       description: 'A modern portfolio website showcasing my work, skills, and experience. Built with Angular and Tailwind CSS.',
       type: 'personal',
       technologies: ['Angular', 'TypeScript', 'Tailwind CSS'],
-      url: 'https://johniel-cenabre.github.io/portfolio',
       githubUrl: 'https://github.com/johniel-cenabre/portfolio'
     },
     {
