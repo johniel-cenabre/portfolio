@@ -27,14 +27,14 @@ interface Project {
           </h3>
           <div class="space-y-4">
             <div *ngFor="let project of companyProjects" 
-                 class="bg-gray-50 border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow">
+                 class="bg-gray-50 dark:bg-gradient-to-br dark:from-gray-800 dark:via-gray-900 dark:to-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6 hover:shadow-md transition-shadow">
               <div class="flex items-start justify-between mb-3">
-                <h4 class="font-bold text-lg text-gray-900">{{ project.title }}</h4>
-                <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-semibold">
+                <h4 class="font-bold text-lg text-gray-900 dark:text-gray-100">{{ project.title }}</h4>
+                <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100 rounded-full text-xs font-semibold">
                   Company
                 </span>
               </div>
-              <p class="text-gray-700 mb-4">{{ project.description }}</p>
+              <p class="text-gray-700 dark:text-gray-400 mb-4">{{ project.description }}</p>
               <div class="flex flex-wrap gap-2 mb-4">
                 <span *ngFor="let tech of project.technologies" 
                       class="px-3 py-1 bg-windows-blue/10 text-windows-blue rounded-full text-sm font-medium">
@@ -62,14 +62,14 @@ interface Project {
           </h3>
           <div class="space-y-4">
             <div *ngFor="let project of personalProjects" 
-                 class="bg-gray-50 border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow">
+                 class="bg-gray-50 dark:bg-gradient-to-br dark:from-gray-800 dark:via-gray-900 dark:to-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6 hover:shadow-md transition-shadow">
               <div class="flex items-start justify-between mb-3">
-                <h4 class="font-bold text-lg text-gray-900">{{ project.title }}</h4>
-                <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs font-semibold">
+                <h4 class="font-bold text-lg text-gray-900 dark:text-gray-100">{{ project.title }}</h4>
+                <span class="px-3 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-100 rounded-full text-xs font-semibold">
                   Personal
                 </span>
               </div>
-              <p class="text-gray-700 mb-4">{{ project.description }}</p>
+              <p class="text-gray-700 dark:text-gray-400 mb-4">{{ project.description }}</p>
               <div class="flex flex-wrap gap-2 mb-4">
                 <span *ngFor="let tech of project.technologies" 
                       class="px-3 py-1 bg-windows-blue/10 text-windows-blue rounded-full text-sm font-medium">

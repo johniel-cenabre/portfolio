@@ -10,6 +10,42 @@ if (!fs.existsSync(sourceDir)) {
   process.exit(1);
 }
 
+// Function to remove old build files
+function removeOldBuildFiles() {
+  console.log('Removing old build files...');
+  
+  const files = fs.readdirSync(rootDir);
+  const patternsToRemove = [
+    /^main-.*\.js$/,
+    /^styles-.*\.css$/,
+    /^polyfills-.*\.js$/
+  ];
+  
+  let removedCount = 0;
+  files.forEach(file => {
+    const filePath = path.join(rootDir, file);
+    const stats = fs.statSync(filePath);
+    
+    // Only process files (not directories)
+    if (stats.isFile()) {
+      // Check if file matches any pattern
+      const shouldRemove = patternsToRemove.some(pattern => pattern.test(file));
+      
+      if (shouldRemove) {
+        try {
+          fs.unlinkSync(filePath);
+          console.log(`  Removed: ${file}`);
+          removedCount++;
+        } catch (error) {
+          console.error(`  Error removing ${file}:`, error.message);
+        }
+      }
+    }
+  });
+  
+  console.log(`Removed ${removedCount} old build file(s).`);
+}
+
 // Get all files from the build directory
 function copyRecursive(src, dest) {
   const exists = fs.existsSync(src);
@@ -30,6 +66,9 @@ function copyRecursive(src, dest) {
     fs.copyFileSync(src, dest);
   }
 }
+
+// Remove old build files first
+removeOldBuildFiles();
 
 // Copy all files from dist-temp/browser to root
 console.log('Moving build files to root directory...');

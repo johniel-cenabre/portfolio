@@ -24,9 +24,9 @@ interface Skill {
           </h3>
           <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             <div *ngFor="let skill of programmingLanguages" 
-                 class="bg-gray-50 border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow text-center">
+                 class="bg-gray-50 dark:bg-gradient-to-br dark:from-gray-800 dark:via-gray-900 dark:to-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4 hover:shadow-md transition-shadow text-center">
               <div class="text-4xl mb-2">{{ skill.icon }}</div>
-              <div class="font-semibold text-gray-900">{{ skill.name }}</div>
+              <div class="font-semibold text-gray-900 dark:text-gray-100">{{ skill.name }}</div>
             </div>
           </div>
         </div>
@@ -39,9 +39,9 @@ interface Skill {
           </h3>
           <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             <div *ngFor="let skill of frameworks" 
-                 class="bg-gray-50 border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow text-center">
+                 class="bg-gray-50 dark:bg-gradient-to-br dark:from-gray-800 dark:via-gray-900 dark:to-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4 hover:shadow-md transition-shadow text-center">
               <div class="text-4xl mb-2">{{ skill.icon }}</div>
-              <div class="font-semibold text-gray-900">{{ skill.name }}</div>
+              <div class="font-semibold text-gray-900 dark:text-gray-100">{{ skill.name }}</div>
             </div>
           </div>
         </div>
@@ -54,9 +54,9 @@ interface Skill {
           </h3>
           <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             <div *ngFor="let skill of tools" 
-                 class="bg-gray-50 border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow text-center">
+                 class="bg-gray-50 dark:bg-gradient-to-br dark:from-gray-800 dark:via-gray-900 dark:to-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4 hover:shadow-md transition-shadow text-center">
               <div class="text-4xl mb-2">{{ skill.icon }}</div>
-              <div class="font-semibold text-gray-900">{{ skill.name }}</div>
+              <div class="font-semibold text-gray-900 dark:text-gray-100">{{ skill.name }}</div>
             </div>
           </div>
         </div>
@@ -69,9 +69,9 @@ interface Skill {
           </h3>
           <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             <div *ngFor="let skill of databases" 
-                 class="bg-gray-50 border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow text-center">
+                 class="bg-gray-50 dark:bg-gradient-to-br dark:from-gray-800 dark:via-gray-900 dark:to-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4 hover:shadow-md transition-shadow text-center">
               <div class="text-4xl mb-2">{{ skill.icon }}</div>
-              <div class="font-semibold text-gray-900">{{ skill.name }}</div>
+              <div class="font-semibold text-gray-900 dark:text-gray-100">{{ skill.name }}</div>
             </div>
           </div>
         </div>

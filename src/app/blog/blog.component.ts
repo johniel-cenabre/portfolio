@@ -21,15 +21,15 @@ interface BlogPost {
     <app-window title="Blog" icon="📝" closeRoute="/">
       <div class="space-y-6">
         <div *ngFor="let post of blogPosts; let i = index" 
-             class="bg-gray-50 border border-gray-200 rounded-lg p-5 md:p-6 hover:shadow-md transition-shadow">
+             class="bg-gray-50 dark:bg-gradient-to-br dark:from-gray-800 dark:via-gray-900 dark:to-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-5 md:p-6 hover:shadow-md transition-shadow">
           <div class="flex items-start justify-between mb-3">
-            <h3 class="font-bold text-xl text-gray-900">{{ post.title }}</h3>
-            <span class="px-3 py-1 bg-windows-blue/10 text-windows-blue rounded-full text-xs font-semibold">
+            <h3 class="font-bold text-xl text-gray-900 dark:text-gray-100">{{ post.title }}</h3>
+            <span class="px-3 py-1 bg-windows-blue/10 dark:bg-dark-windows-blue/30 text-windows-blue dark:text-dark-windows-blue rounded-full text-xs font-semibold">
               {{ post.category }}
             </span>
           </div>
           
-          <div class="flex items-center gap-4 text-sm text-gray-600 mb-3">
+          <div class="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-400 mb-3">
             <div class="flex items-center gap-1">
               <span>📅</span>
               <span>{{ post.date }}</span>
@@ -40,7 +40,7 @@ interface BlogPost {
             </div>
           </div>
 
-          <p class="text-gray-700 mb-4">{{ post.excerpt }}</p>
+          <p class="text-gray-700 dark:text-gray-400 mb-4">{{ post.excerpt }}</p>
 
           <button (click)="openPostModal(i)" 
                   class="text-windows-blue hover:underline font-semibold inline-flex items-center gap-2 cursor-pointer">
@@ -51,7 +51,7 @@ interface BlogPost {
         <!-- Empty State -->
         <div *ngIf="blogPosts.length === 0" class="text-center py-12">
           <span class="text-6xl mb-4 block">📝</span>
-          <p class="text-gray-600 text-lg">No blog posts yet. Check back soon!</p>
+          <p class="text-gray-600 dark:text-gray-400 text-lg">No blog posts yet. Check back soon!</p>
         </div>
       </div>
 
