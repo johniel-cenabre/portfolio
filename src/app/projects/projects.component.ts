@@ -138,6 +138,7 @@ export class ProjectsComponent {
       description: 'A full-stack task management application with user authentication, real-time updates, and collaborative features.',
       type: 'personal',
       technologies: ['Vue.js', 'Node.js', 'IndexedDB', 'Tailwind CSS'],
+      url: 'https://johniel-cenabre.github.io/task-manager/',
       githubUrl: 'https://github.com/johniel-cenabre/task-manager'
     },
     {

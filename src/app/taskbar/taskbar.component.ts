@@ -28,7 +28,7 @@ interface MenuItem {
 
       <!-- Start Menu -->
       <div *ngIf="startMenuOpen" 
-           class="absolute bottom-10 left-0 w-80 bg-windows-light-gray border-2 border-black shadow-2xl z-[70]"
+           class="absolute top-10 left-0 w-80 bg-windows-light-gray border-2 border-black shadow-2xl z-[70]"
            (click)="$event.stopPropagation()">
         <!-- Menu Header -->
         <div class="bg-windows-blue text-white px-4 py-2 border-b-2 border-black">
@@ -39,7 +39,7 @@ interface MenuItem {
         </div>
 
         <!-- Menu Items -->
-        <div class="max-h-[500px] overflow-y-auto">
+        <div class="max-h-[550px] overflow-y-auto">
           <div *ngFor="let item of menuItems" 
                (click)="navigateToRoute(item.route)"
                class="flex items-center gap-3 px-4 py-3 hover:bg-windows-blue hover:text-white cursor-pointer transition-colors border-b border-gray-300 last:border-b-0">

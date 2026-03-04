@@ -8,15 +8,14 @@ import { TaskbarComponent } from './taskbar/taskbar.component';
   imports: [RouterOutlet, TaskbarComponent],
   template: `
     <div class="w-screen h-screen flex flex-col relative overflow-hidden bg-desktop-bg desktop-background">
+      <!-- Taskbar -->
+      <app-taskbar></app-taskbar>
       <!-- Desktop Area with Icons -->
       <div class="flex-1 relative overflow-hidden">
         <div class="absolute inset-0 p-4">
           <router-outlet></router-outlet>
         </div>
       </div>
-      
-      <!-- Taskbar -->
-      <app-taskbar></app-taskbar>
     </div>
   `
 })

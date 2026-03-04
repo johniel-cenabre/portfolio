@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   imports: [CommonModule],
   template: `
     <!-- Modal Overlay -->
-    <div class="fixed top-0 left-0 right-0 bottom-10 bg-black/50 flex items-center justify-center z-50 pointer-events-auto">
+    <div class="fixed top-10 left-0 right-0 bottom-0 bg-black/50 flex items-center justify-center z-50 pointer-events-auto">
       <!-- Window Container -->
       <div class="bg-windows-light-gray border-2 border-black shadow-2xl w-full h-full flex flex-col pointer-events-auto">
         <!-- Window Title Bar -->

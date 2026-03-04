@@ -41,26 +41,32 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor(private router: Router) {}
 
   desktopIcons: DesktopIcon[] = [
+    // Column 1
     { name: 'Bio', icon: '📧', route: 'bio', x: 20, y: 20, vx: 0, vy: 0, isDragging: false },
     { name: 'Skills', icon: '⚡', route: 'skills', x: 20, y: 100, vx: 0, vy: 0, isDragging: false },
     { name: 'Experience', icon: '💻', route: 'experience', x: 20, y: 180, vx: 0, vy: 0, isDragging: false },
     { name: 'Projects', icon: '💼', route: 'projects', x: 20, y: 260, vx: 0, vy: 0, isDragging: false },
-    { name: 'Education', icon: '🎓', route: 'education', x: 20, y: 340, vx: 0, vy: 0, isDragging: false },
-    { name: 'Contact', icon: '👤', route: 'contact', x: 20, y: 420, vx: 0, vy: 0, isDragging: false },
-    { name: 'Games', icon: '🎮', route: 'games', x: 20, y: 500, vx: 0, vy: 0, isDragging: false },
-    { name: 'Blog', icon: '📝', route: 'blog', x: 20, y: 580, vx: 0, vy: 0, isDragging: false }
+    // Column 2
+    { name: 'Education', icon: '🎓', route: 'education', x: 120, y: 20, vx: 0, vy: 0, isDragging: false },
+    { name: 'Contact', icon: '👤', route: 'contact', x: 120, y: 100, vx: 0, vy: 0, isDragging: false },
+    { name: 'Games', icon: '🎮', route: 'games', x: 120, y: 180, vx: 0, vy: 0, isDragging: false },
+    { name: 'Blog', icon: '📝', route: 'blog', x: 120, y: 260, vx: 0, vy: 0, isDragging: false }
   ];
 
   private draggedIconIndex: number | null = null;
   private dragOffset = { x: 0, y: 0 };
   private lastMousePos = { x: 0, y: 0 };
   private lastTouchPos = { x: 0, y: 0 };
+  private initialTouchPos = { x: 0, y: 0 };
   private animationFrameId: number | null = null;
   private isTouch = false;
+  private hasMoved = false;
+  private touchStartIndex: number | null = null;
   private readonly FRICTION = 0.95;
   private readonly BOUNCE = 0.7;
   private readonly ICON_SIZE = 64;
   private readonly DESKTOP_PADDING = 16;
+  private readonly TAP_THRESHOLD = 10; // pixels - movement less than this is considered a tap
 
   ngOnInit() {
     this.startPhysicsLoop();
@@ -74,14 +80,18 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   startDrag(event: MouseEvent, index: number) {
     event.preventDefault();
+    event.stopPropagation();
     this.isTouch = false;
     const icon = this.desktopIcons[index];
     icon.isDragging = true;
     this.draggedIconIndex = index;
     
-    const rect = (event.currentTarget as HTMLElement).getBoundingClientRect();
-    this.dragOffset.x = event.clientX - rect.left - this.ICON_SIZE / 2;
-    this.dragOffset.y = event.clientY - rect.top - this.ICON_SIZE / 2;
+    const desktopRect = document.querySelector('.flex-1')?.getBoundingClientRect();
+    if (desktopRect) {
+      // Calculate offset from icon top-left to mouse position
+      this.dragOffset.x = event.clientX - desktopRect.left - icon.x;
+      this.dragOffset.y = event.clientY - desktopRect.top - icon.y;
+    }
     this.lastMousePos = { x: event.clientX, y: event.clientY };
     
     icon.vx = 0;
@@ -91,6 +101,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   startDragTouch(event: TouchEvent, index: number) {
     event.preventDefault();
     this.isTouch = true;
+    this.hasMoved = false;
+    this.touchStartIndex = index;
     const icon = this.desktopIcons[index];
     icon.isDragging = true;
     this.draggedIconIndex = index;
@@ -100,14 +112,16 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.dragOffset.x = touch.clientX - rect.left - this.ICON_SIZE / 2;
     this.dragOffset.y = touch.clientY - rect.top - this.ICON_SIZE / 2;
     this.lastTouchPos = { x: touch.clientX, y: touch.clientY };
+    this.initialTouchPos = { x: touch.clientX, y: touch.clientY };
     
     icon.vx = 0;
     icon.vy = 0;
   }
 
-  @HostListener('mousemove', ['$event'])
+  @HostListener('document:mousemove', ['$event'])
   onMouseMove(event: MouseEvent) {
     if (this.draggedIconIndex !== null && !this.isTouch) {
+      event.preventDefault();
       this.updateDragPosition(event.clientX, event.clientY);
     }
   }
@@ -117,6 +131,16 @@ export class HomeComponent implements OnInit, OnDestroy {
     if (this.draggedIconIndex !== null && event.touches.length > 0) {
       event.preventDefault();
       const touch = event.touches[0];
+      
+      // Check if user has moved beyond tap threshold
+      const dx = touch.clientX - this.initialTouchPos.x;
+      const dy = touch.clientY - this.initialTouchPos.y;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+      
+      if (distance > this.TAP_THRESHOLD) {
+        this.hasMoved = true;
+      }
+      
       this.updateDragPosition(touch.clientX, touch.clientY);
     }
   }
@@ -127,13 +151,15 @@ export class HomeComponent implements OnInit, OnDestroy {
     const icon = this.desktopIcons[this.draggedIconIndex];
     const desktopRect = document.querySelector('.flex-1')?.getBoundingClientRect();
     if (desktopRect) {
+      // Calculate new position: mouse position relative to desktop minus the offset
       const newX = clientX - desktopRect.left - this.dragOffset.x;
       const newY = clientY - desktopRect.top - this.dragOffset.y;
       
-      // Calculate velocity
+      // Calculate velocity for physics
       icon.vx = (newX - icon.x) * 0.5;
       icon.vy = (newY - icon.y) * 0.5;
       
+      // Constrain to desktop bounds
       icon.x = Math.max(this.DESKTOP_PADDING, Math.min(newX, window.innerWidth - this.ICON_SIZE - this.DESKTOP_PADDING));
       icon.y = Math.max(this.DESKTOP_PADDING, Math.min(newY, window.innerHeight - 40 - this.ICON_SIZE - this.DESKTOP_PADDING));
       
@@ -145,7 +171,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
   }
 
-  @HostListener('mouseup', ['$event'])
+  @HostListener('document:mouseup', ['$event'])
   onMouseUp(event: MouseEvent) {
     if (this.draggedIconIndex !== null && !this.isTouch) {
       this.endDrag();
@@ -156,6 +182,13 @@ export class HomeComponent implements OnInit, OnDestroy {
   onTouchEnd(event: TouchEvent) {
     if (this.draggedIconIndex !== null) {
       event.preventDefault();
+      
+      // If it was a tap (no significant movement), open the section
+      if (!this.hasMoved && this.touchStartIndex !== null) {
+        const icon = this.desktopIcons[this.touchStartIndex];
+        this.openSection(icon.route);
+      }
+      
       this.endDrag();
     }
   }
@@ -173,6 +206,8 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.desktopIcons[this.draggedIconIndex].isDragging = false;
       this.draggedIconIndex = null;
       this.isTouch = false;
+      this.hasMoved = false;
+      this.touchStartIndex = null;
     }
   }
 
