@@ -3,6 +3,7 @@ module.exports = {
   content: [
     "./src/**/*.{html,ts}",
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
@@ -12,6 +13,11 @@ module.exports = {
         'windows-light-gray': '#e0e0e0',
         'windows-dark-gray': '#808080',
         'desktop-bg': '#008080',
+        // Dark theme colors
+        'dark-windows-blue': '#1a86d4',
+        'dark-windows-gray': '#2d2d2d',
+        'dark-windows-light-gray': '#1e1e1e',
+        'dark-desktop-bg': '#0d1117',
       },
       fontFamily: {
         'windows': ['Segoe UI', 'Tahoma', 'Geneva', 'Verdana', 'sans-serif'],

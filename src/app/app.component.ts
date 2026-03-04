@@ -7,7 +7,7 @@ import { TaskbarComponent } from './taskbar/taskbar.component';
   standalone: true,
   imports: [RouterOutlet, TaskbarComponent],
   template: `
-    <div class="w-screen h-screen flex flex-col relative overflow-hidden bg-desktop-bg desktop-background">
+    <div class="w-screen h-screen flex flex-col relative overflow-hidden bg-desktop-bg dark:bg-dark-desktop-bg desktop-background">
       <!-- Taskbar -->
       <app-taskbar></app-taskbar>
       <!-- Desktop Area with Icons -->

@@ -28,9 +28,9 @@ interface DesktopIcon {
          [style.left.px]="icon.x"
          [style.top.px]="icon.y"
          [style.z-index]="icon.isDragging ? 1000 : 10">
-      <div class="flex flex-col items-center w-16 hover:bg-windows-blue/20 rounded px-1 py-1 transition-colors">
+      <div class="flex flex-col items-center w-16 hover:bg-windows-blue/20 dark:hover:bg-dark-windows-blue/30 rounded px-1 py-1 transition-colors">
         <span class="text-3xl">{{ icon.icon }}</span>
-        <span class="text-white text-sm text-center drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)] max-w-[70px] break-words">
+        <span class="text-white dark:text-gray-100 text-sm text-center drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)] dark:drop-shadow-[0_1px_2px_rgba(255,255,255,0.3)] max-w-[70px] break-words">
           {{ icon.name }}
         </span>
       </div>
