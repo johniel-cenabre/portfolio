@@ -138,16 +138,16 @@ export class ProjectsComponent {
       description: 'A full-stack task management application with user authentication, real-time updates, and collaborative features.',
       type: 'personal',
       technologies: ['Vue.js', 'Node.js', 'IndexedDB', 'Tailwind CSS'],
-      url: 'https://johniel-cenabre.github.io/task-manager/',
+      url: 'https://johniel-cenabre.github.io/task-manager',
       githubUrl: 'https://github.com/johniel-cenabre/task-manager'
     },
     {
-      title: 'Weather Dashboard',
-      description: 'A responsive weather dashboard that displays current conditions and forecasts using weather APIs.',
+      title: 'Earthquake Dashboard',
+      description: 'A responsive earthquake dashboard that displays current earthquakes using earthquake APIs.',
       type: 'personal',
-      technologies: ['React', 'JavaScript', 'CSS3', 'Weather API'],
-      url: '#',
-      githubUrl: 'https://github.com/yourusername/weather-dashboard'
+      technologies: ['Svelte', 'Vite', 'Tailwind CSS', 'Earthquake API'],
+      url: 'https://johniel-cenabre.github.io/quake-watch',
+      githubUrl: 'https://github.com/johniel-cenabre/quake-watch'
     }
   ];
 }
