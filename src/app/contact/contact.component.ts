@@ -11,7 +11,7 @@ import { WindowComponent } from '../components/window/window.component';
       <div class="space-y-6">
         <!-- Email Section -->
         <div class="flex items-start gap-4">
-          <div class="flex-shrink-0 w-12 h-12 bg-windows-blue/10 dark:bg-blue-500/10 rounded-lg flex items-center justify-center">
+          <div class="flex-shrink-0 w-12 h-12 bg-windows-blue/10 dark:bg-blue-100/10 rounded-lg flex items-center justify-center">
             <span class="text-2xl">📧</span>
           </div>
           <div class="flex-1">
@@ -25,7 +25,7 @@ import { WindowComponent } from '../components/window/window.component';
 
         <!-- Phone Section -->
         <div class="flex items-start gap-4">
-          <div class="flex-shrink-0 w-12 h-12 bg-windows-blue/10 dark:bg-blue-500/10 rounded-lg flex items-center justify-center">
+          <div class="flex-shrink-0 w-12 h-12 bg-windows-blue/10 dark:bg-blue-100/10 rounded-lg flex items-center justify-center">
             <span class="text-2xl">📱</span>
           </div>
           <div class="flex-1">
@@ -39,7 +39,7 @@ import { WindowComponent } from '../components/window/window.component';
 
         <!-- Location Section -->
         <div class="flex items-start gap-4">
-          <div class="flex-shrink-0 w-12 h-12 bg-windows-blue/10 dark:bg-blue-500/10 rounded-lg flex items-center justify-center">
+          <div class="flex-shrink-0 w-12 h-12 bg-windows-blue/10 dark:bg-blue-100/10 rounded-lg flex items-center justify-center">
             <span class="text-2xl">📍</span>
           </div>
           <div class="flex-1">
@@ -52,7 +52,7 @@ import { WindowComponent } from '../components/window/window.component';
 
         <!-- Social Links Section -->
         <div class="flex items-start gap-4">
-          <div class="flex-shrink-0 w-12 h-12 bg-windows-blue/10 dark:bg-blue-500/10 rounded-lg flex items-center justify-center">
+          <div class="flex-shrink-0 w-12 h-12 bg-windows-blue/10 dark:bg-blue-100/10 rounded-lg flex items-center justify-center">
             <span class="text-2xl">🔗</span>
           </div>
           <div class="flex-1">
@@ -78,7 +78,7 @@ import { WindowComponent } from '../components/window/window.component';
 
         <!-- Availability Section -->
         <div class="flex items-start gap-4">
-          <div class="flex-shrink-0 w-12 h-12 bg-windows-blue/10 dark:bg-blue-500/10 rounded-lg flex items-center justify-center">
+          <div class="flex-shrink-0 w-12 h-12 bg-windows-blue/10 dark:bg-blue-100/10 rounded-lg flex items-center justify-center">
             <span class="text-2xl">⏰</span>
           </div>
           <div class="flex-1">
