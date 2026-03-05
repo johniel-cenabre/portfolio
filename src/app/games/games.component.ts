@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { WindowComponent } from '../components/window/window.component';
 import { SnakeComponent } from './snake.component';
-import { TicTacToeComponent } from './tictactoe.component';
+import { TetrisComponent } from './tetris.component';
 import { MemoryComponent } from './memory.component';
 import { WordPuzzleComponent } from './wordpuzzle.component';
 import { ArkanoidComponent } from './arkanoid.component';
@@ -12,8 +12,7 @@ interface Game {
   description: string;
   icon: string;
   playUrl?: string;
-  technologies: string[];
-  type: 'snake' | 'tictactoe' | 'memory' | 'wordpuzzle' | 'arkanoid';
+  type: 'snake' | 'tetris' | 'memory' | 'wordpuzzle' | 'arkanoid';
 }
 
 @Component({
@@ -23,7 +22,7 @@ interface Game {
     CommonModule, 
     WindowComponent,
     SnakeComponent,
-    TicTacToeComponent,
+    TetrisComponent,
     MemoryComponent,
     WordPuzzleComponent,
     ArkanoidComponent
@@ -50,13 +49,6 @@ interface Game {
                         class="px-4 py-2 bg-gray-300 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg font-semibold cursor-not-allowed">
                   Coming Soon
                 </button>
-              </div>
-
-              <div class="flex flex-wrap gap-2">
-                <span *ngFor="let tech of game.technologies" 
-                      class="px-3 py-1 bg-windows-blue/10 dark:bg-dark-windows-blue/30 text-windows-blue dark:text-dark-windows-blue rounded-full text-sm font-medium">
-                  {{ tech }}
-                </span>
               </div>
             </div>
           </div>
@@ -90,7 +82,7 @@ interface Game {
           <!-- Game Content -->
           <div class="flex-1 overflow-y-auto p-4 md:p-6 dark:text-gray-100">
             <app-snake *ngIf="selectedGame.type === 'snake'"></app-snake>
-            <app-tictactoe *ngIf="selectedGame.type === 'tictactoe'"></app-tictactoe>
+            <app-tetris *ngIf="selectedGame.type === 'tetris'"></app-tetris>
             <app-memory *ngIf="selectedGame.type === 'memory'"></app-memory>
             <app-wordpuzzle *ngIf="selectedGame.type === 'wordpuzzle'"></app-wordpuzzle>
             <app-arkanoid *ngIf="selectedGame.type === 'arkanoid'"></app-arkanoid>
@@ -109,22 +101,20 @@ export class GamesComponent {
       description: 'Classic snake game built with JavaScript. Control the snake to eat food and grow longer. Avoid hitting walls or yourself!',
       icon: '🐍',
       playUrl: '#',
-      technologies: ['JavaScript', 'HTML5', 'CSS3'],
       type: 'snake'
     },
     {
-      title: 'Tic Tac Toe',
-      description: 'A simple yet engaging tic-tac-toe game with AI opponent. Challenge yourself to beat the computer!',
-      icon: '⭕',
-      technologies: ['JavaScript', 'React', 'CSS'],
-      type: 'tictactoe'
+      title: 'Tetris',
+      description: 'Classic Tetris game! Rotate and place falling blocks to clear lines. The game gets faster as you level up!',
+      icon: '🧩',
+      playUrl: '#',
+      type: 'tetris'
     },
     {
       title: 'Memory Card Game',
       description: 'Test your memory with this card matching game. Flip cards to find matching pairs and complete the board!',
       icon: '🃏',
       playUrl: '#',
-      technologies: ['TypeScript', 'Angular', 'CSS'],
       type: 'memory'
     },
     {
@@ -132,7 +122,6 @@ export class GamesComponent {
       description: 'A word guessing game where you have limited attempts to guess the hidden word.',
       icon: '🧩',
       playUrl: '#',
-      technologies: ['JavaScript', 'Vue.js'],
       type: 'wordpuzzle'
     },
     {
@@ -140,7 +129,6 @@ export class GamesComponent {
       description: 'Classic brick-breaking game! Use arrow keys or mouse to move the paddle and bounce the ball to break all bricks.',
       icon: '🧱',
       playUrl: '#',
-      technologies: ['TypeScript', 'Canvas API', 'Angular'],
       type: 'arkanoid'
     }
   ];

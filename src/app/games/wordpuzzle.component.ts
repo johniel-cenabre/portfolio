@@ -39,7 +39,6 @@ import { CommonModule } from '@angular/common';
   `
 })
 export class WordPuzzleComponent {
-  words = ['ANGULAR', 'TYPESCRIPT', 'JAVASCRIPT', 'REACT', 'VUE', 'NODEJS', 'PYTHON', 'JAVA', 'HTML', 'CSS'];
   word = '';
   display: string[] = [];
   guessedLetters: string[] = [];
@@ -47,15 +46,45 @@ export class WordPuzzleComponent {
   gameOver = false;
   won = false;
 
+  private readonly wordList = [
+    'APPLE', 'BREAD', 'CHAIR', 'DANCE', 'EARTH', 'FLAME', 'GRAPE', 'HEART', 'IMAGE', 'JOKER',
+    'KNIFE', 'LIGHT', 'MAGIC', 'NIGHT', 'OCEAN', 'PEACE', 'QUICK', 'RIVER', 'SMILE', 'TABLE',
+    'VOICE', 'WHEAT', 'YOUNG', 'ZEBRA', 'BEACH', 'CLOUD', 'DREAM', 'FLOWER', 'GREEN', 'HAPPY',
+    'JELLY', 'LEMON', 'MUSIC', 'PAPER', 'QUEEN', 'ROBOT', 'STONE', 'TIGER', 'WATER', 'YELLOW',
+    'BANANA', 'CAMERA', 'DANCER', 'EAGLE', 'FAMILY', 'GARDEN', 'ISLAND', 'JUNGLE', 'KITTEN', 'LEMON',
+    'MONKEY', 'NATURE', 'ORANGE', 'PENCIL', 'RABBIT', 'SCHOOL', 'TIGER', 'VICTOR', 'WINDOW', 'YELLOW',
+    'BIRTH', 'CLOCK', 'DRINK', 'FROST', 'GHOST', 'HORSE', 'JOKES', 'LUNCH', 'MOUSE', 'PHONE',
+    'QUART', 'ROBIN', 'SPACE', 'THREE', 'UNITY', 'WOMAN', 'XENON', 'YACHT', 'ZONAL', 'BROWN',
+    'CLEAN', 'DREAM', 'EARLY', 'FINAL', 'GIANT', 'HUMAN', 'INNER', 'JUDGE', 'KNOCK', 'LARGE',
+    'MONEY', 'NORTH', 'OTHER', 'PHASE', 'QUIET', 'RADIO', 'SHINE', 'THINK', 'UNION', 'WOMEN',
+    'XEROX', 'YOUTH', 'ZONED', 'BLACK', 'CROWN', 'DRIVE', 'FOCUS', 'GLOBE', 'HOTEL', 'INPUT',
+    'JUMPS', 'KNEES', 'LEAVE', 'MARCH', 'NOVEL', 'OFFER', 'PHONE', 'QUEST', 'REACH', 'SHAPE',
+    'TRAIN', 'USAGE', 'VALUE', 'WAVES', 'XENIA', 'YARDS', 'ZONES', 'BRAVE', 'CRAFT', 'DRAWN',
+    'FACES', 'GAMES', 'HANDS', 'IDEAS', 'JOKES', 'KINGS', 'LANDS', 'MAKES', 'NEEDS', 'OPENS',
+    'PAGES', 'QUICK', 'RINGS', 'SIDES', 'TALES', 'USERS', 'VIEWS', 'WORDS', 'XENON', 'YEARS',
+    'ZEROS', 'BRIEF', 'CLEAR', 'DRAWS', 'FACTS', 'GATES', 'HILLS', 'ITEMS', 'JUMPS', 'KINDS',
+    'LINES', 'MAILS', 'NAMES', 'OWNER', 'PARTS', 'QUITE', 'ROADS', 'SIGNS', 'TASKS', 'UNITS',
+    'VOTES', 'WALLS', 'XENIA', 'YARDS', 'ZONES', 'BROKE', 'CROWD', 'DROPS', 'FACES', 'GRASS',
+    'HOLES', 'ICONS', 'JUMPS', 'KEEPS', 'LISTS', 'MIXES', 'NODES', 'OPENS', 'PICKS', 'QUITS',
+    'ROLES', 'SIZES', 'TEXTS', 'USERS', 'VESTS', 'WIRES', 'XENON', 'YIELDS', 'ZONES', 'BRAND',
+    'CHART', 'DRAFT', 'FACTS', 'GRANT', 'HARSH', 'IDEAL', 'JUMPS', 'KNITS', 'LUNGS', 'MAGIC',
+    'NODES', 'OPENS', 'PATCH', 'QUITS', 'RANKS', 'SHARP', 'TRACK', 'USAGE', 'VALUE', 'WAVES',
+    'XENIA', 'YARDS', 'ZONES', 'BRAIN', 'CLEAN', 'DRAIN', 'FACES', 'GRAIN', 'HANDS', 'IDEAS',
+    'JUMPS', 'KNEES', 'LUNGS', 'MAINS', 'NEARS', 'OPENS', 'PAGES', 'QUITS', 'RANKS', 'SHARP',
+    'TRAIN', 'USAGE', 'VALUE', 'WAVES', 'XENIA', 'YARDS', 'ZONES', 'BRAND', 'CROWD', 'DROPS',
+    'FACTS', 'GRASS', 'HOLES', 'ICONS', 'JUMPS', 'KEEPS', 'LISTS', 'MIXES', 'NODES', 'OPENS',
+    'PICKS', 'QUITS', 'ROLES', 'SIZES', 'TEXTS', 'USERS', 'VESTS', 'WIRES', 'XENON', 'YIELDS'
+  ];
+
   constructor() {
     this.reset();
   }
 
   reset() {
-    this.word = this.words[Math.floor(Math.random() * this.words.length)];
+    this.word = this.wordList[Math.ceil(Math.random() * this.wordList.length)];
     this.display = this.word.split('').map(() => '_');
     this.guessedLetters = [];
-    this.attempts = 6;
+    this.attempts = this.word.length;
     this.gameOver = false;
     this.won = false;
   }

@@ -8,13 +8,16 @@ import { CommonModule } from '@angular/common';
   template: `
     <div class="flex flex-col items-center">
       <div class="mb-4 text-center">
-        <p class="text-gray-600 dark:text-gray-400 mb-2">Use arrow keys to control the snake. Eat food to grow!</p>
+        <p class="text-gray-600 dark:text-gray-400 mb-2">Use arrow keys (or touch/swipe on mobile) to control the snake. Eat food to grow!</p>
         <p class="text-sm text-gray-500 dark:text-gray-500">Score: <span class="font-bold">{{ score }}</span></p>
       </div>
       <canvas #canvas 
               [width]="canvasSize" 
               [height]="canvasSize"
-              class="border-2 border-gray-300 dark:border-gray-700 bg-gray-100 dark:bg-gray-800 rounded-lg max-w-full"></canvas>
+              (touchstart)="onTouchStart($event)"
+              (touchmove)="onTouchMove($event)"
+              (touchend)="onTouchEnd($event)"
+              class="border-2 border-gray-300 dark:border-gray-700 bg-gray-100 dark:bg-gray-800 rounded-lg max-w-full touch-none"></canvas>
       <button *ngIf="gameOver" 
               (click)="startGame()"
               class="mt-4 px-6 py-2 bg-windows-blue text-white rounded-lg hover:bg-windows-dark-blue transition-colors font-semibold">
@@ -36,6 +39,9 @@ export class SnakeComponent implements OnInit, OnDestroy {
   private food = {x: 15, y: 15};
   private readonly gridSize = 20;
   private readonly tileCount = 20;
+
+  private touchStartPos: { x: number, y: number } | null = null;
+  private readonly minSwipeDistance = 10; // Minimum distance to register a swipe
 
   private resizeHandler = () => this.updateCanvasSize();
 
@@ -120,6 +126,75 @@ export class SnakeComponent implements OnInit, OnDestroy {
     
     ctx.fillStyle = '#dc2626';
     ctx.fillRect(this.food.x * cellSize, this.food.y * cellSize, cellSize - 2, cellSize - 2);
+  }
+
+  onTouchStart(event: TouchEvent) {
+    if (this.gameOver) return;
+    event.preventDefault();
+    
+    const canvas = this.canvasRef?.nativeElement;
+    if (!canvas) return;
+    
+    const touch = event.touches[0];
+    const rect = canvas.getBoundingClientRect();
+    this.touchStartPos = {
+      x: touch.clientX - rect.left,
+      y: touch.clientY - rect.top
+    };
+  }
+
+  onTouchMove(event: TouchEvent) {
+    if (this.gameOver || !this.touchStartPos) return;
+    event.preventDefault();
+    
+    const canvas = this.canvasRef?.nativeElement;
+    if (!canvas) return;
+    
+    const touch = event.touches[0];
+    const rect = canvas.getBoundingClientRect();
+    const currentPos = {
+      x: touch.clientX - rect.left,
+      y: touch.clientY - rect.top
+    };
+    
+    const dx = currentPos.x - this.touchStartPos.x;
+    const dy = currentPos.y - this.touchStartPos.y;
+    const distance = Math.sqrt(dx * dx + dy * dy);
+    
+    // Only update direction if moved enough
+    if (distance >= this.minSwipeDistance) {
+      const absDx = Math.abs(dx);
+      const absDy = Math.abs(dy);
+      
+      // Determine primary direction (horizontal or vertical)
+      if (absDx > absDy) {
+        // Horizontal movement
+        if (dx > 0 && this.direction.x === 0) {
+          // Swipe right
+          this.direction = { x: 1, y: 0 };
+        } else if (dx < 0 && this.direction.x === 0) {
+          // Swipe left
+          this.direction = { x: -1, y: 0 };
+        }
+      } else {
+        // Vertical movement
+        if (dy > 0 && this.direction.y === 0) {
+          // Swipe down
+          this.direction = { x: 0, y: 1 };
+        } else if (dy < 0 && this.direction.y === 0) {
+          // Swipe up
+          this.direction = { x: 0, y: -1 };
+        }
+      }
+      
+      // Update touch start position for continuous following
+      this.touchStartPos = currentPos;
+    }
+  }
+
+  onTouchEnd(event: TouchEvent) {
+    event.preventDefault();
+    this.touchStartPos = null;
   }
 
   @HostListener('window:keydown', ['$event'])

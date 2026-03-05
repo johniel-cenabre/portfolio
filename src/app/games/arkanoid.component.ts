@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
   template: `
     <div class="flex flex-col items-center">
       <div class="mb-4 text-center">
-        <p class="text-gray-600 dark:text-gray-400 mb-2">Use arrow keys or mouse to move the paddle. Break all bricks!</p>
+        <p class="text-gray-600 dark:text-gray-400 mb-2">Use arrow keys, mouse, or touch/drag on mobile to move the paddle. Break all bricks!</p>
         <p class="text-sm text-gray-500 dark:text-gray-500">
           Score: <span class="font-bold">{{ score }}</span> | 
           Lives: <span class="font-bold">{{ lives }}</span> | 
@@ -19,7 +19,7 @@ import { CommonModule } from '@angular/common';
         </p>
         <button *ngIf="gameOver || !started" 
                 (click)="startGame()"
-                class="px-4 py-2 bg-windows-blue text-white rounded-lg hover:bg-windows-dark-blue transition-colors font-semibold text-sm">
+                class="mt-4 px-4 py-2 bg-windows-blue text-white rounded-lg hover:bg-windows-dark-blue transition-colors font-semibold text-sm">
           {{ gameOver ? 'Play Again' : 'Start Game' }}
         </button>
       </div>
@@ -27,7 +27,10 @@ import { CommonModule } from '@angular/common';
               [width]="canvasWidth" 
               [height]="canvasHeight"
               (mousemove)="onMouseMove($event)"
-              class="border-2 border-gray-300 dark:border-gray-700 bg-gray-900 rounded-lg cursor-none max-w-full"></canvas>
+              (touchstart)="onTouchStart($event)"
+              (touchmove)="onTouchMove($event)"
+              (touchend)="onTouchEnd($event)"
+              class="border-2 border-gray-300 dark:border-gray-700 bg-gray-900 rounded-lg cursor-none max-w-full touch-none"></canvas>
     </div>
   `
 })
@@ -46,6 +49,8 @@ export class ArkanoidComponent implements OnInit, OnDestroy {
   private ball = { x: 0, y: 0, radius: 8, dx: 3, dy: -3 };
   private bricks: Array<{x: number, y: number, width: number, height: number, destroyed: boolean, color: string}> = [];
   private keys: { left: boolean, right: boolean } = { left: false, right: false };
+  private touchStartX: number | null = null;
+  private touchStartPaddleX: number | null = null;
   
   canvasWidth = 600;
   canvasHeight = 400;
@@ -229,7 +234,54 @@ export class ArkanoidComponent implements OnInit, OnDestroy {
     const canvas = event.currentTarget as HTMLCanvasElement;
     const rect = canvas.getBoundingClientRect();
     const mouseX = event.clientX - rect.left;
-    this.paddle.x = Math.max(0, Math.min(mouseX - this.paddle.width / 2, this.canvasWidth - this.paddle.width));
+    this.updatePaddlePosition(mouseX);
+  }
+
+  onTouchStart(event: TouchEvent) {
+    if (!this.started || this.gameOver) return;
+    event.preventDefault();
+    
+    const canvas = this.canvasRef?.nativeElement;
+    if (!canvas) return;
+    
+    const touch = event.touches[0];
+    if (!touch) return;
+    
+    const rect = canvas.getBoundingClientRect();
+    this.touchStartX = touch.clientX - rect.left;
+    this.touchStartPaddleX = this.paddle.x;
+  }
+
+  onTouchMove(event: TouchEvent) {
+    if (!this.started || this.gameOver || this.touchStartX === null || this.touchStartPaddleX === null) return;
+    event.preventDefault();
+    
+    const canvas = this.canvasRef?.nativeElement;
+    if (!canvas) return;
+    
+    const touch = event.touches[0];
+    if (!touch) return;
+    
+    const rect = canvas.getBoundingClientRect();
+    const currentTouchX = touch.clientX - rect.left;
+    
+    // Calculate the distance dragged from the initial touch position
+    const dragDistance = currentTouchX - this.touchStartX;
+    
+    // Update paddle position based on the drag distance relative to starting position
+    const newPaddleX = this.touchStartPaddleX + dragDistance;
+    this.paddle.x = Math.max(0, Math.min(newPaddleX, this.canvasWidth - this.paddle.width));
+  }
+
+  onTouchEnd(event: TouchEvent) {
+    event.preventDefault();
+    // Reset touch tracking
+    this.touchStartX = null;
+    this.touchStartPaddleX = null;
+  }
+
+  private updatePaddlePosition(x: number) {
+    this.paddle.x = Math.max(0, Math.min(x - this.paddle.width / 2, this.canvasWidth - this.paddle.width));
   }
 
   @HostListener('window:keydown', ['$event'])
