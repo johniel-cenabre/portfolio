@@ -68,6 +68,9 @@ import { WindowComponent } from '../components/window/window.component';
             <span class="px-4 py-2 bg-windows-blue/10 text-windows-blue rounded-lg text-sm font-medium">
               AI/Machine Learning
             </span>
+            <span class="px-4 py-2 bg-windows-blue/10 text-windows-blue rounded-lg text-sm font-medium">
+              Game Development
+            </span>
           </div>
         </div>
       </div>
