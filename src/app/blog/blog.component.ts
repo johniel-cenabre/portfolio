@@ -118,6 +118,58 @@ export class BlogComponent {
 
   blogPosts: BlogPost[] = [
     {
+      title: 'Tips on Coping with Burnout (What\'s Worked for Me)',
+      date: 'February 14, 2026',
+      excerpt: 'Burnout hit me harder than I expected. Here are the things that actually helped – not a prescription, just what I learned the hard way.',
+      category: 'Tips',
+      readTime: '7 min',
+      image: 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=800&h=400&fit=crop',
+      content: [
+        'I\'m not a therapist or a productivity guru – just someone who\'s been through periods where work felt like quicksand and motivation was nowhere to be found. Everyone\'s burnout looks different, so take this as one person\'s experience, not a rulebook.',
+        'The first thing that actually helped was admitting I was burned out. I kept telling myself I was "just tired" or "in a slump." Once I could name it, I stopped adding guilt on top of exhaustion. It sounds small, but for me it was a turning point.',
+        'I had to get strict about boundaries, even when it felt impossible. No emails or Slack after a certain hour. One day on the weekend with the laptop closed. I felt guilty at first – like I was slacking – but my work got better when I wasn\'t running on fumes. Your mileage may vary, but for me, "always on" was the fast track to crashing.',
+        'Rest had to be real rest. Scrolling or half-watching something didn\'t cut it. I needed things that actually pulled my brain elsewhere: walks, cooking, a dumb hobby that had nothing to do with code. Something where I could lose track of time and not think about the next ticket.',
+        'Talking about it helped more than I expected. Not necessarily in a formal way – just being honest with a couple of people I trust. It made the whole thing feel less isolating. If you have someone who gets it, use them. If not, even writing it down can take some of the weight off.',
+        'I still have rough weeks. Burnout isn\'t something I "solved" once and for all. But these habits – naming it, guarding rest, and not trying to power through in silence – have made the dips shorter and less brutal.',
+        'Beyond the personal stuff, there are evidence-backed levers worth trying. Regular exercise – even 20–30 minutes of walking or light movement – is linked to better mood and energy. It doesn\'t have to be the gym; consistency matters more than intensity.',
+        'Better time management can reduce the "everything is urgent" feeling. Blocking focus time, batching similar tasks, and saying no to non-essential asks can create breathing room. Tools and techniques vary, but the goal is the same: control over your calendar instead of the other way around.',
+        'Health consciousness helps too: sleep, hydration, and not living on caffeine and snacks. Small changes – a slightly earlier bedtime, a water bottle on the desk – add up. Your body and mind are connected; treating one well supports the other.',
+        'If you\'re in it right now, remember that burnout is a signal, not a life sentence. It can get better. Take one small step – a walk, a boundary, a conversation – and build from there. You\'re allowed to need a different pace. You\'re allowed to recover.'
+      ]
+    },
+    {
+      title: 'Why AI Won\'t Replace Software Engineers',
+      date: 'January 22, 2026',
+      excerpt: 'AI is changing how we build software, but it\'s amplifying engineers rather than replacing them. Here\'s why judgment, context, and ownership still belong in human hands.',
+      category: 'Career',
+      readTime: '6 min',
+      image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=400&fit=crop',
+      content: [
+        'Headlines about AI replacing programmers have been around for years. The reality in 2026 is different: AI is a powerful tool in the hands of engineers, not a substitute for them. Code generation, autocomplete, and refactoring assistants speed up the mechanics of coding, but they don\'t replace the thinking that makes software valuable.',
+        'Software engineering is more than typing code. It\'s understanding requirements, making trade-offs, and deciding what to build and what to cut. It\'s talking to stakeholders, debugging production issues, and choosing architectures that will hold up over time. AI can suggest implementations, but it can\'t own the outcome or sit in the room when priorities change.',
+        'Context is everything. AI models are trained on huge amounts of public code and text, but they don\'t know your codebase, your users, or your business rules. Engineers bring that context. They know why that legacy module exists, which customers depend on this API, and what "done" actually means for the current sprint. That knowledge is irreplaceable.',
+        'Someone still has to review, test, and ship. AI-generated code can be wrong, insecure, or a poor fit. Engineers validate output, write tests, and integrate it into systems that have to run reliably. The job shifts from "write every line" to "curate, correct, and connect" – which is still engineering, just at a higher level of leverage.',
+        'The best use of AI in 2026 is as a pair programmer: drafting boilerplate, explaining unfamiliar code, suggesting tests, and speeding up iteration. Engineers who learn to prompt well, evaluate outputs critically, and keep ownership of design and quality are more productive, not obsolete.',
+        'So if you\'re in software, the move isn\'t to compete with the model – it\'s to get better at the parts only humans can do: product sense, collaboration, judgment under uncertainty, and taking responsibility for what gets built. AI is not replacing software engineers; it\'s raising the bar for what we can build together.'
+      ]
+    },
+    {
+      title: 'Making Games with JavaScript',
+      date: 'November 18, 2025',
+      excerpt: 'A tour of technologies and techniques for building games in the browser, with a focus on the Canvas API, game loops, and libraries that make canvas-based game development a joy.',
+      category: 'Game Development',
+      readTime: '7 min',
+      image: 'https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=800&h=400&fit=crop',
+      content: [
+        'Building games in the browser with JavaScript is more accessible than ever, and the heart of that story is the Canvas API. Whether you\'re drawing 2D sprites or pushing pixels in WebGL, canvas gives you a direct, high-performance surface to build on. Here\'s a focused look at the tech that makes canvas game development tick.',
+        'The HTML5 Canvas element is your blank slate. You get a 2D context for classic 2D games – sprites, tiles, particles, and UI – with a simple, immediate-mode API. For anything that needs 3D or heavy GPU work, the same canvas can host a WebGL (or WebGL2) context, giving you shaders and hardware-accelerated rendering. Choosing 2D vs WebGL usually comes down to your game\'s style and performance needs.',
+        'The game loop is where everything comes together. Using requestAnimationFrame keeps your updates synced to the display and avoids tearing. A typical loop does: update game state (positions, physics, input), then draw the current frame. Keeping update logic separate from drawing makes it easier to add variable timesteps or fixed timesteps for physics later.',
+        'Libraries built on top of canvas can save you a lot of boilerplate. Phaser is a full-featured 2D game framework with scenes, sprites, tilemaps, and audio. PixiJS is a fast 2D renderer that excels at WebGL-backed sprites and effects. For 3D in the browser, Three.js is the go-to for scenes, cameras, and shaders. Each of these targets canvas (or WebGL) under the hood so you stay in the same ecosystem.',
+        'Performance matters when you\'re drawing every frame. Batch draw calls, reuse objects where you can, and keep offscreen work to a minimum. For 2D, sprite atlases and object pooling are classic wins. For WebGL, reducing state changes and draw calls will keep your frame rate smooth. Profiling with the browser\'s dev tools helps you see where the time goes.',
+        'Whether you\'re prototyping a small canvas game or scaling up with a framework, the stack is mature and well-documented. Start with a simple 2D context and a requestAnimationFrame loop, then layer in sprites, input, and sound. When you need more firepower, reach for Phaser, PixiJS, or Three.js – they\'re all built to make canvas game development practical and fun.'
+      ]
+    },
+    {
       title: 'Getting Started with Angular: A Beginner\'s Guide',
       date: 'March 15, 2024',
       excerpt: 'Learn the fundamentals of Angular framework, from setting up your first project to understanding components, services, and dependency injection.',
