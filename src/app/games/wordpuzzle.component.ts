@@ -84,7 +84,7 @@ export class WordPuzzleComponent {
     this.word = this.wordList[Math.ceil(Math.random() * this.wordList.length)];
     this.display = this.word.split('').map(() => '_');
     this.guessedLetters = [];
-    this.attempts = this.word.length;
+    this.attempts = this.word.length + 2;
     this.gameOver = false;
     this.won = false;
   }

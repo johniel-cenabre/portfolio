@@ -18,7 +18,7 @@ interface Tetromino {
   template: `
     <div class="flex flex-col items-center">
       <div class="mb-4 text-center">
-        <p class="text-gray-600 dark:text-gray-400 mb-2">Use arrow keys to move/rotate. Space to drop fast! On mobile: tap to rotate, swipe down to drop, swipe left/right to move.</p>
+        <p class="text-gray-600 dark:text-gray-400 mb-2">Use arrow keys or WASD to move/rotate. Space to drop fast! On mobile: tap to rotate, swipe down to drop, swipe left/right to move.</p>
         <div class="flex gap-4 justify-center text-sm">
           <p class="text-gray-500 dark:text-gray-500">Score: <span class="font-bold">{{ score }}</span></p>
           <p class="text-gray-500 dark:text-gray-500">Lines: <span class="font-bold">{{ lines }}</span></p>
@@ -645,18 +645,26 @@ export class TetrisComponent implements OnInit, AfterViewInit, OnDestroy {
     
     switch(event.key) {
       case 'ArrowLeft':
+      case 'a':
+      case 'A':
         event.preventDefault();
         this.movePiece(-1, 0);
         break;
       case 'ArrowRight':
+      case 'd':
+      case 'D':
         event.preventDefault();
         this.movePiece(1, 0);
         break;
       case 'ArrowDown':
+      case 's':
+      case 'S':
         event.preventDefault();
         this.movePiece(0, 1);
         break;
       case 'ArrowUp':
+      case 'w':
+      case 'W':
         event.preventDefault();
         this.rotatePiece();
         break;

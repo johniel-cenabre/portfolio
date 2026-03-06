@@ -8,29 +8,39 @@ import { CommonModule } from '@angular/common';
   template: `
     <div class="flex flex-col items-center">
       <div class="mb-4 text-center">
-        <p class="text-gray-600 dark:text-gray-400 mb-2">Use arrow keys, mouse, or touch/drag on mobile to move the paddle. Break all bricks!</p>
+        <p class="text-gray-600 dark:text-gray-400 mb-2">Use arrow keys or mouse to move the paddle (cursor locks to canvas on start). Press <kbd class="px-1.5 py-0.5 bg-gray-200 dark:bg-gray-600 rounded text-sm font-mono">Esc</kbd> to unlock; click canvas to lock again. Touch/drag on mobile.</p>
         <p class="text-sm text-gray-500 dark:text-gray-500">
           Score: <span class="font-bold">{{ score }}</span> | 
           Lives: <span class="font-bold">{{ lives }}</span> | 
           Bricks: <span class="font-bold">{{ bricksLeft }}</span>
         </p>
-        <p class="text-lg font-bold mb-2" *ngIf="gameOver">
-          {{ won ? 'Congratulations! You cleared all bricks! 🎉' : 'Game Over! Try again!' }}
-        </p>
-        <button *ngIf="gameOver || !started" 
+        <button *ngIf="!started" 
                 (click)="startGame()"
                 class="mt-4 px-4 py-2 bg-windows-blue text-white rounded-lg hover:bg-windows-dark-blue transition-colors font-semibold text-sm">
-          {{ gameOver ? 'Play Again' : 'Start Game' }}
+          Start Game
         </button>
       </div>
-      <canvas #canvas
-              [width]="canvasWidth" 
-              [height]="canvasHeight"
-              (mousemove)="onMouseMove($event)"
-              (touchstart)="onTouchStart($event)"
-              (touchmove)="onTouchMove($event)"
-              (touchend)="onTouchEnd($event)"
-              class="border-2 border-gray-300 dark:border-gray-700 bg-gray-900 rounded-lg cursor-none max-w-full touch-none"></canvas>
+      <div class="relative inline-block max-w-full">
+        <canvas #canvas
+                [width]="canvasWidth" 
+                [height]="canvasHeight"
+                (click)="onCanvasClick($event)"
+                (mousemove)="onMouseMove($event)"
+                (touchstart)="onTouchStart($event)"
+                (touchmove)="onTouchMove($event)"
+                (touchend)="onTouchEnd($event)"
+                class="border-2 border-gray-300 dark:border-gray-700 bg-gray-900 rounded-lg cursor-none max-w-full touch-none"></canvas>
+        <div *ngIf="gameOver"
+             class="absolute inset-0 flex flex-col items-center justify-center gap-4 rounded-lg border-2 border-gray-300 dark:border-gray-700 bg-black/70 text-white p-4">
+          <p class="text-xl md:text-2xl font-bold text-center">
+            {{ won ? 'Congratulations! You cleared all bricks! 🎉' : 'Game Over! Try again!' }}
+          </p>
+          <button (click)="startGame()"
+                  class="px-4 py-2 bg-windows-blue text-white rounded-lg hover:bg-windows-dark-blue transition-colors font-semibold text-sm">
+            Play Again
+          </button>
+        </div>
+      </div>
     </div>
   `
 })
@@ -44,9 +54,22 @@ export class ArkanoidComponent implements OnInit, OnDestroy {
   won = false;
   started = false;
   
+  /** Base ball speed at reference height (400px). Scales with canvas height. */
+  private readonly ballSpeedAtRefHeight = 4;
+  private readonly ballSpeedRefHeight = 400;
+
+  private get ballSpeed(): number {
+    return this.ballSpeedAtRefHeight * (this.canvasHeight / this.ballSpeedRefHeight);
+  }
+
+  /** Only use pointer lock on desktop (not on touch/mobile devices). */
+  private get shouldUsePointerLock(): boolean {
+    return !('ontouchstart' in window);
+  }
+
   private interval: any;
   private paddle = { x: 0, y: 0, width: 100, height: 10 };
-  private ball = { x: 0, y: 0, radius: 8, dx: 3, dy: -3 };
+  private ball = { x: 0, y: 0, radius: 8, dx: 0, dy: 0 };
   private bricks: Array<{x: number, y: number, width: number, height: number, destroyed: boolean, color: string}> = [];
   private keys: { left: boolean, right: boolean } = { left: false, right: false };
   private touchStartX: number | null = null;
@@ -56,11 +79,13 @@ export class ArkanoidComponent implements OnInit, OnDestroy {
   canvasHeight = 400;
 
   private resizeHandler = () => this.updateCanvasSize();
+  private pointerLockChangeHandler = () => {};
 
   ngOnInit() {
     // Make canvas responsive to modal width
     this.updateCanvasSize();
     window.addEventListener('resize', this.resizeHandler);
+    document.addEventListener('pointerlockchange', this.pointerLockChangeHandler);
     this.initGame();
   }
 
@@ -69,6 +94,8 @@ export class ArkanoidComponent implements OnInit, OnDestroy {
       clearInterval(this.interval);
     }
     window.removeEventListener('resize', this.resizeHandler);
+    document.removeEventListener('pointerlockchange', this.pointerLockChangeHandler);
+    document.exitPointerLock();
   }
 
   private updateCanvasSize() {
@@ -87,7 +114,8 @@ export class ArkanoidComponent implements OnInit, OnDestroy {
     this.gameOver = false;
     this.won = false;
     this.paddle = { x: this.canvasWidth / 2 - 50, y: this.canvasHeight - 20, width: 100, height: 10 };
-    this.ball = { x: this.canvasWidth / 2, y: this.canvasHeight - 50, radius: 8, dx: 3, dy: -3 };
+    const speed = this.ballSpeed;
+    this.ball = { x: this.canvasWidth / 2, y: this.canvasHeight - 50, radius: 8, dx: speed, dy: -speed };
     this.keys = { left: false, right: false };
     
     // Create bricks
@@ -127,6 +155,11 @@ export class ArkanoidComponent implements OnInit, OnDestroy {
     }
     
     this.interval = setInterval(() => this.update(), 16);
+    
+    const canvas = this.canvasRef?.nativeElement;
+    if (this.shouldUsePointerLock && canvas?.requestPointerLock) {
+      canvas.requestPointerLock();
+    }
   }
 
   update() {
@@ -159,7 +192,7 @@ export class ArkanoidComponent implements OnInit, OnDestroy {
         this.ball.x - this.ball.radius < this.paddle.x + this.paddle.width) {
       this.ball.dy = -Math.abs(this.ball.dy);
       const hitPos = (this.ball.x - this.paddle.x) / this.paddle.width;
-      this.ball.dx = (hitPos - 0.5) * 6;
+      this.ball.dx = (hitPos - 0.5) * this.ballSpeed * 2;
     }
     
     // Ball collision with bricks
@@ -178,6 +211,7 @@ export class ArkanoidComponent implements OnInit, OnDestroy {
           this.won = true;
           this.gameOver = true;
           clearInterval(this.interval);
+          document.exitPointerLock();
         }
         break;
       }
@@ -186,14 +220,16 @@ export class ArkanoidComponent implements OnInit, OnDestroy {
     // Ball falls below paddle
     if (this.ball.y > this.canvasHeight) {
       this.lives--;
-      if (this.lives <= 0) {
+        if (this.lives <= 0) {
         this.gameOver = true;
         clearInterval(this.interval);
+        document.exitPointerLock();
       } else {
         this.ball.x = this.canvasWidth / 2;
         this.ball.y = this.canvasHeight - 50;
-        this.ball.dx = 3;
-        this.ball.dy = -3;
+        const speed = this.ballSpeed;
+        this.ball.dx = speed;
+        this.ball.dy = -speed;
       }
     }
     
@@ -228,13 +264,29 @@ export class ArkanoidComponent implements OnInit, OnDestroy {
     ctx.fill();
   }
 
+  onCanvasClick(event: MouseEvent) {
+    if (!this.shouldUsePointerLock) return;
+    if (this.started && !this.gameOver && document.pointerLockElement !== this.canvasRef?.nativeElement) {
+      const canvas = this.canvasRef?.nativeElement;
+      if (canvas?.requestPointerLock) {
+        canvas.requestPointerLock();
+      }
+    }
+  }
+
   onMouseMove(event: MouseEvent) {
     if (!this.started || this.gameOver) return;
     
-    const canvas = event.currentTarget as HTMLCanvasElement;
-    const rect = canvas.getBoundingClientRect();
-    const mouseX = event.clientX - rect.left;
-    this.updatePaddlePosition(mouseX);
+    const canvas = this.canvasRef?.nativeElement;
+    if (!canvas) return;
+    
+    if (document.pointerLockElement === canvas) {
+      this.paddle.x = Math.max(0, Math.min(this.paddle.x + event.movementX, this.canvasWidth - this.paddle.width));
+    } else {
+      const rect = canvas.getBoundingClientRect();
+      const mouseX = event.clientX - rect.left;
+      this.updatePaddlePosition(mouseX);
+    }
   }
 
   onTouchStart(event: TouchEvent) {
@@ -286,6 +338,10 @@ export class ArkanoidComponent implements OnInit, OnDestroy {
 
   @HostListener('window:keydown', ['$event'])
   handleKeyDown(event: KeyboardEvent) {
+    if (event.key === 'Escape') {
+      document.exitPointerLock();
+      return;
+    }
     if (!this.started || this.gameOver) return;
     
     switch(event.key) {

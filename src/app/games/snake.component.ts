@@ -8,21 +8,27 @@ import { CommonModule } from '@angular/common';
   template: `
     <div class="flex flex-col items-center">
       <div class="mb-4 text-center">
-        <p class="text-gray-600 dark:text-gray-400 mb-2">Use arrow keys (or touch/swipe on mobile) to control the snake. Eat food to grow!</p>
+        <p class="text-gray-600 dark:text-gray-400 mb-2">Use arrow keys or WASD (or touch/swipe on mobile) to control the snake. Eat food to grow!</p>
         <p class="text-sm text-gray-500 dark:text-gray-500">Score: <span class="font-bold">{{ score }}</span></p>
       </div>
-      <canvas #canvas 
-              [width]="canvasSize" 
-              [height]="canvasSize"
-              (touchstart)="onTouchStart($event)"
-              (touchmove)="onTouchMove($event)"
-              (touchend)="onTouchEnd($event)"
-              class="border-2 border-gray-300 dark:border-gray-700 bg-gray-100 dark:bg-gray-800 rounded-lg max-w-full touch-none"></canvas>
-      <button *ngIf="gameOver" 
-              (click)="startGame()"
-              class="mt-4 px-6 py-2 bg-windows-blue text-white rounded-lg hover:bg-windows-dark-blue transition-colors font-semibold">
-        Play Again
-      </button>
+      <div class="relative inline-block max-w-full">
+        <canvas #canvas 
+                [width]="canvasSize" 
+                [height]="canvasSize"
+                (touchstart)="onTouchStart($event)"
+                (touchmove)="onTouchMove($event)"
+                (touchend)="onTouchEnd($event)"
+                class="border-2 border-gray-300 dark:border-gray-700 bg-gray-100 dark:bg-gray-800 rounded-lg max-w-full touch-none"></canvas>
+        <div *ngIf="gameOver"
+             class="absolute inset-0 flex flex-col items-center justify-center gap-4 rounded-lg border-2 border-gray-300 dark:border-gray-700 bg-black/70 text-white p-4">
+          <p class="text-xl md:text-2xl font-bold text-center">Game Over!</p>
+          <p class="text-sm text-gray-200">Score: <span class="font-bold">{{ score }}</span></p>
+          <button (click)="startGame()"
+                  class="px-6 py-2 bg-windows-blue text-white rounded-lg hover:bg-windows-dark-blue transition-colors font-semibold">
+            Play Again
+          </button>
+        </div>
+      </div>
     </div>
   `
 })
@@ -203,21 +209,29 @@ export class SnakeComponent implements OnInit, OnDestroy {
     
     switch(event.key) {
       case 'ArrowUp':
+      case 'w':
+      case 'W':
         if (this.direction.y === 0) {
           this.direction = { x: 0, y: -1 };
         }
         break;
       case 'ArrowDown':
+      case 's':
+      case 'S':
         if (this.direction.y === 0) {
           this.direction = { x: 0, y: 1 };
         }
         break;
       case 'ArrowLeft':
+      case 'a':
+      case 'A':
         if (this.direction.x === 0) {
           this.direction = { x: -1, y: 0 };
         }
         break;
       case 'ArrowRight':
+      case 'd':
+      case 'D':
         if (this.direction.x === 0) {
           this.direction = { x: 1, y: 0 };
         }
