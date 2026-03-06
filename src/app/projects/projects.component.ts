@@ -148,6 +148,14 @@ export class ProjectsComponent {
       technologies: ['Svelte', 'Vite', 'Tailwind CSS', 'Earthquake API'],
       url: 'https://johniel-cenabre.github.io/quake-watch',
       githubUrl: 'https://github.com/johniel-cenabre/quake-watch'
+    },
+    {
+      title: 'Tactical Game',
+      description: 'A turn-based tactical game with grid movement, unit facing, and 4-directional movement. Built for the browser with a focus on clear UI and snappy gameplay.',
+      type: 'personal',
+      technologies: ['Three.js', 'Canvas', 'Node.js'],
+      url: 'https://johniel-cenabre.github.io/tactics',
+      githubUrl: 'https://github.com/johniel-cenabre/tactics'
     }
   ];
 }
